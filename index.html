@@ -1,0 +1,1812 @@
+﻿<!doctype html>
+<html lang="es">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#1F5AA6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#171B20" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="BDA Anual">
+<title>BDA Anual Broward</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+
+<style>
+/* ═══════════════════════════════════════════════ tokens
+   Paleta sacada del mundo del equipo: rojo de gabinete NEMA, ámbar de alta
+   visibilidad, verde de lámpara de estado, y un neutro gris-acero con sesgo
+   azul (la cara del panel), nunca un gris puro.                            */
+:root{
+  --ground:#F2F4F3; --card:#FFFFFF; --sunk:#E7EAE9;
+  --ink:#14171C; --ink2:#3F4854; --ink3:#6B7480;
+  --line:#D3D9D8; --line2:#C0C8C7;
+  --red:#C8281E; --red-s:#FBECEA;
+  --amber:#B57A05; --amber-s:#FCF3DF;
+  --green:#1E7A4C; --green-s:#E4F2EA;
+  --steel:#5A6472;
+  --brand:#1F5AA6; --brand-s:#E6EEF8;
+  --shadow:0 1px 2px rgba(20,23,28,.07),0 4px 14px rgba(20,23,28,.05);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0E1114; --card:#171B20; --sunk:#101418;
+    --ink:#EDF0F2; --ink2:#AFB8C2; --ink3:#7C8794;
+    --line:#272D34; --line2:#343C45;
+    --red:#F0685C; --red-s:#2B1614;
+    --amber:#E5AE3C; --amber-s:#2A2211;
+    --green:#4FBE86; --green-s:#122519;
+    --steel:#8B95A3;
+    --brand:#6EA6EE; --brand-s:#14223A;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 4px 16px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0E1114; --card:#171B20; --sunk:#101418;
+  --ink:#EDF0F2; --ink2:#AFB8C2; --ink3:#7C8794;
+  --line:#272D34; --line2:#343C45;
+  --red:#F0685C; --red-s:#2B1614;
+  --amber:#E5AE3C; --amber-s:#2A2211;
+  --green:#4FBE86; --green-s:#122519;
+  --steel:#8B95A3;
+  --brand:#6EA6EE; --brand-s:#14223A;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 4px 16px rgba(0,0,0,.3);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font:400 16px/1.5 Barlow,"Helvetica Neue",Arial,sans-serif;
+  -webkit-text-size-adjust:100%;overflow-x:hidden;
+  padding-bottom:96px;
+}
+h1,h2,h3{font-family:"Barlow Condensed",Barlow,sans-serif;text-wrap:balance;margin:0}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0}
+:focus-visible{outline:2.5px solid var(--brand);outline-offset:2px;border-radius:4px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+
+/* ═══════════════════════════════════════════════ cabecera */
+header{
+  position:sticky;top:0;z-index:40;background:var(--card);
+  border-bottom:1px solid var(--line);box-shadow:var(--shadow);
+}
+.hbar{display:flex;align-items:center;gap:10px;padding:9px 13px}
+.mark{
+  width:30px;height:30px;flex:0 0 30px;border-radius:6px;background:var(--brand);
+  display:grid;place-items:center;color:#fff;
+  font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:16px;letter-spacing:.02em;
+}
+.htxt{flex:1;min-width:0}
+.htxt b{
+  display:block;font-family:"Barlow Condensed",sans-serif;font-weight:600;
+  font-size:18px;line-height:1.15;letter-spacing:.01em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.htxt small{display:block;font-size:12px;color:var(--ink3);line-height:1.3;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hbtn{
+  flex:0 0 auto;padding:7px 10px;border:1px solid var(--line2);border-radius:8px;
+  font-family:"Barlow Condensed",sans-serif;font-weight:600;font-size:14px;
+  letter-spacing:.05em;color:var(--ink2);background:var(--card);
+}
+.hbtn[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.pbar{height:5px;background:var(--sunk);display:flex}
+.pbar i{display:block;height:100%;transition:width .25s}
+.pbar .pd{background:var(--green)}
+.pbar .pn{background:var(--steel)}
+
+/* ═══════════════════════════════════════════════ layout */
+main{max-width:760px;margin:0 auto;padding:13px 13px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  box-shadow:var(--shadow);margin-bottom:13px;overflow:hidden}
+
+/* ── datos del proyecto */
+.meta{padding:13px}
+.meta h2{font-size:15px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);
+  font-weight:600;margin-bottom:11px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.grid2 .full{grid-column:1/-1}
+.f label{display:block;font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--ink3);font-weight:600;margin-bottom:3px}
+.f input,.f select,.f textarea{
+  width:100%;padding:9px 10px;border:1px solid var(--line2);border-radius:8px;
+  background:var(--ground);color:var(--ink);font-size:16px;
+}
+.f textarea{resize:vertical;min-height:64px;font-size:15px}
+
+.sendto{margin:0 0 11px;font-size:14px;line-height:1.45;color:var(--ink2)}
+.sendto b{color:var(--ink)}
+.act.big{width:100%;font-size:18px;padding:15px}
+.cap{margin:9px 0 0;font-size:12.5px;line-height:1.45;color:var(--ink3)}
+.cap.bad{color:var(--red);font-weight:600}
+.cap.good{color:var(--green)}
+.sendrow{display:flex;gap:9px;margin-top:11px}
+/* ── campos de texto y opcion (anual) */
+.cmp{margin-top:10px}
+.cmp label{display:block;font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--ink3);font-weight:600;margin-bottom:4px}
+.cmpin{width:100%;padding:9px 10px;border:1px solid var(--line2);border-radius:8px;
+  background:var(--ground);color:var(--ink);font-size:16px}
+.cmp .sops{gap:6px}
+.cmp .sop{min-width:84px;padding:9px 8px}
+.sendrow .act{flex:1}
+
+/* ── preguntas de configuración */
+.setq{margin-top:13px;padding-top:12px;border-top:1px solid var(--line)}
+.sq{font-size:14.5px;font-weight:600;line-height:1.35;margin-bottom:8px}
+.sops{display:flex;gap:8px;flex-wrap:wrap}
+.sop{flex:1;min-width:120px;padding:12px 10px;border:1.5px solid var(--line2);border-radius:10px;
+  background:var(--ground);font-family:"Barlow Condensed",sans-serif;font-weight:600;
+  font-size:16px;letter-spacing:.02em;color:var(--ink2);min-height:46px}
+.sop.on{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+.sn{margin-top:7px;font-size:12.5px;line-height:1.4;color:var(--ink3)}
+
+/* ── fotos con nombre propio */
+.slot{margin-top:10px;padding:9px 10px;border:1px solid var(--line);border-radius:9px;
+  background:var(--ground);display:flex;flex-wrap:wrap;align-items:center;gap:9px}
+.slabel{flex:1;min-width:140px;font-size:13.5px;font-weight:600;line-height:1.3}
+.slot .thumbs{flex-basis:100%;margin-top:0}
+
+/* ── campo numérico */
+.numrow{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:10px}
+.numrow label{font-size:13px;font-weight:600;color:var(--ink2);min-width:104px}
+.numin{width:104px;padding:10px;border:1.5px solid var(--line2);border-radius:9px;
+  background:var(--card);color:var(--ink);font-size:17px;font-family:"IBM Plex Mono",monospace;
+  font-variant-numeric:tabular-nums;text-align:center}
+.numrow .u{font-size:13px;color:var(--ink3);font-weight:600}
+.verdict{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:14px;
+  letter-spacing:.04em;text-transform:uppercase}
+.verdict.good{color:var(--green)}
+.verdict.bad{color:var(--red)}
+
+/* ── módulo de isolation */
+.iso{margin-top:11px;padding:12px;border:1.5px solid var(--line2);border-radius:11px;
+  background:var(--ground)}
+.isoband{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:12px;
+  letter-spacing:.06em;color:var(--steel);margin-bottom:9px}
+.isoq{font-size:13px;font-weight:600;color:var(--ink2);margin-bottom:7px}
+.isoradios{display:flex;gap:8px;flex-wrap:wrap}
+.rb{flex:1;min-width:110px;padding:11px 8px;border:1.5px solid var(--line2);border-radius:9px;
+  background:var(--card);font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:17px;
+  color:var(--ink2);min-height:46px}
+.rb span{display:block;font-size:11px;font-weight:600;letter-spacing:.05em;opacity:.75}
+.rb.on{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+.isoout{margin-top:11px;padding:11px;border-radius:9px;background:var(--card);
+  border:1.5px solid var(--line2);display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.isoout b{font-family:"Barlow Condensed",sans-serif;font-size:27px;font-weight:700;line-height:1}
+.isoout .thr{font-size:12.5px;color:var(--ink3);font-variant-numeric:tabular-nums}
+.isoout .vd{margin-left:auto;font-family:"Barlow Condensed",sans-serif;font-weight:700;
+  font-size:15px;letter-spacing:.05em}
+.isoout.good{border-color:var(--green);background:var(--green-s)}
+.isoout.good b,.isoout.good .vd{color:var(--green)}
+.isoout.edge{border-color:var(--amber);background:var(--amber-s)}
+.isoout.edge b,.isoout.edge .vd{color:var(--amber)}
+.isoout.bad{border-color:var(--red);background:var(--red-s)}
+.isoout.bad b,.isoout.bad .vd{color:var(--red)}
+
+.warnbox{margin:0 0 12px;padding:11px 13px;border-radius:10px;background:var(--amber-s);
+  border:1px solid var(--amber);color:var(--ink);font-size:13.5px;line-height:1.45;font-weight:500}
+
+.hint{margin:-2px 3px 13px;font-size:13.5px;line-height:1.45;color:var(--ink3)}
+.hint b{color:var(--ink2)}
+
+/* ── secciones */
+.sec{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  box-shadow:var(--shadow);margin-bottom:11px;overflow:hidden}
+.sec.jur{border-left:4px solid var(--amber)}
+.shead{display:flex;align-items:center;gap:11px;width:100%;padding:13px;text-align:left}
+.sid{
+  flex:0 0 auto;min-width:38px;height:30px;padding:0 8px;border-radius:7px;
+  background:var(--sunk);color:var(--ink2);display:grid;place-items:center;
+  font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:14px;
+}
+.sec.jur .sid{background:var(--amber-s);color:var(--amber)}
+.sec.mine{border-left-color:var(--red)}
+.sec.mine .sid{background:var(--red-s);color:var(--red)}
+.sec.off{opacity:.5}
+.jtag{display:inline-block;margin-top:3px;font-family:"Barlow Condensed",sans-serif;
+  font-weight:600;font-size:11px;letter-spacing:.09em;padding:1px 6px;border-radius:4px}
+.jtag.y{background:var(--red-s);color:var(--red)}
+.jtag.n{background:var(--sunk);color:var(--ink3)}
+.naall{margin:11px 13px;padding:9px 12px;border:1px dashed var(--line2);border-radius:9px;
+  width:calc(100% - 26px);font-family:"Barlow Condensed",sans-serif;font-weight:600;
+  font-size:15px;letter-spacing:.03em;color:var(--ink2);background:var(--ground)}
+.sec.done .sid{background:var(--green-s);color:var(--green)}
+.stx{flex:1;min-width:0}
+.stx b{display:block;font-family:"Barlow Condensed",sans-serif;font-weight:600;
+  font-size:19px;line-height:1.2}
+.stx small{font-size:12.5px;color:var(--ink3);font-variant-numeric:tabular-nums}
+.chev{flex:0 0 auto;color:var(--ink3);transition:transform .18s}
+.sec[open] .chev{transform:rotate(90deg)}
+.sbody{border-top:1px solid var(--line)}
+
+/* ── aviso de sección */
+.flag{margin:11px 13px 0;padding:10px 12px;border-radius:9px;
+  background:var(--amber-s);border:1px solid color-mix(in srgb,var(--amber) 32%,transparent);
+  font-size:13.5px;line-height:1.45;color:var(--ink)}
+
+/* ── ítem */
+.it{display:flex;gap:11px;padding:12px 13px;border-bottom:1px solid var(--line)}
+.it:last-child{border-bottom:0}
+.it.ok{background:var(--green-s)}
+.it.na{opacity:.55}
+.state{
+  flex:0 0 auto;width:46px;height:46px;border-radius:11px;border:2px solid var(--line2);
+  background:var(--card);display:grid;place-items:center;
+  font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:13px;
+  letter-spacing:.04em;color:var(--ink3);
+}
+.it.ok .state{background:var(--green);border-color:var(--green);color:#fff;font-size:22px}
+.it.na .state{background:var(--sunk);border-color:var(--line2);color:var(--ink2)}
+.ibody{flex:1;min-width:0}
+.irow1{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.iid{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:12.5px;
+  color:var(--steel);letter-spacing:-.01em}
+.ev{font-family:"Barlow Condensed",sans-serif;font-weight:600;font-size:11px;
+  letter-spacing:.09em;text-transform:uppercase;padding:1px 6px;border-radius:4px}
+.ev.foto{background:var(--sunk);color:var(--ink2)}
+.ev.video{background:var(--red-s);color:var(--red)}
+.ev.doc{background:var(--sunk);color:var(--ink2)}
+.it .t{display:block;font-weight:600;font-size:15.5px;line-height:1.35;margin-top:2px}
+.it .h{display:block;font-size:13.5px;line-height:1.45;color:var(--ink2);margin-top:5px}
+.it .h.warn{color:var(--ink);background:var(--red-s);border-left:3px solid var(--red);
+  padding:7px 9px;border-radius:0 7px 7px 0}
+
+.tools{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px;align-items:center}
+.tb{
+  padding:8px 12px;border:1px solid var(--line2);border-radius:9px;background:var(--card);
+  font-family:"Barlow Condensed",sans-serif;font-weight:600;font-size:14.5px;
+  letter-spacing:.03em;color:var(--ink2);display:inline-flex;align-items:center;gap:6px;
+  min-height:40px;
+}
+.tb.add{border-color:var(--steel);color:var(--ink)}
+.tb.on{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.thumbs{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
+.th{position:relative;width:74px;height:74px;border-radius:9px;overflow:hidden;
+  border:1px solid var(--line2);background:var(--sunk)}
+.th img{width:100%;height:100%;object-fit:cover;display:block}
+.th .vid{width:100%;height:100%;display:grid;place-items:center;text-align:center;
+  font-family:"Barlow Condensed",sans-serif;font-weight:600;font-size:12px;
+  color:var(--red);line-height:1.15;padding:4px}
+.th button{position:absolute;top:2px;right:2px;width:24px;height:24px;border-radius:6px;
+  background:rgba(20,23,28,.78);color:#fff;font-size:15px;line-height:1;display:grid;
+  place-items:center}
+.note{width:100%;margin-top:9px;padding:8px 10px;border:1px solid var(--line2);
+  border-radius:8px;background:var(--ground);font-size:15px;resize:vertical;min-height:40px}
+
+/* ── barra inferior */
+.dock{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--card);
+  border-top:1px solid var(--line);padding:9px 13px calc(9px + env(safe-area-inset-bottom));
+  box-shadow:0 -3px 16px rgba(20,23,28,.09);
+}
+.dinner{max-width:760px;margin:0 auto;display:flex;gap:9px;align-items:center}
+.dstat{flex:1;min-width:0;line-height:1.2}
+.dstat b{display:block;font-family:"Barlow Condensed",sans-serif;font-size:21px;font-weight:700}
+.dstat small{font-size:11.5px;color:var(--ink3);display:block;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.act{
+  padding:11px 15px;border-radius:10px;font-family:"Barlow Condensed",sans-serif;
+  font-weight:700;font-size:16px;letter-spacing:.04em;text-transform:uppercase;
+  border:1.5px solid var(--ink);color:var(--ink);background:var(--card);min-height:46px;
+}
+.act.pri{background:var(--brand);border-color:var(--brand);color:#fff}
+.act[disabled]{opacity:.4}
+
+/* ── hoja de proyectos */
+.sheet{position:fixed;inset:0;z-index:60;background:rgba(20,23,28,.55);
+  display:none;align-items:flex-end}
+.sheet.on{display:flex}
+.sheet .in{background:var(--card);width:100%;max-height:82vh;overflow:auto;
+  border-radius:16px 16px 0 0;padding:15px 15px calc(15px + env(safe-area-inset-bottom))}
+.sheet h3{font-size:20px;margin-bottom:11px}
+.prow{display:flex;align-items:center;gap:10px;padding:11px;border:1px solid var(--line);
+  border-radius:10px;margin-bottom:8px;background:var(--ground)}
+.prow.cur{border-color:var(--brand);background:var(--brand-s)}
+.prow .pn2{flex:1;min-width:0}
+.prow b{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prow small{font-size:12px;color:var(--ink3)}
+
+.toast{
+  position:fixed;left:50%;bottom:104px;transform:translateX(-50%);z-index:70;
+  background:var(--ink);color:var(--ground);padding:11px 17px;border-radius:10px;
+  font-size:14.5px;font-weight:500;max-width:88vw;text-align:center;
+  box-shadow:0 6px 24px rgba(0,0,0,.3);
+}
+.hide{display:none!important}
+</style>
+
+<header>
+  <div class="hbar">
+    <div class="mark">BW</div>
+    <div class="htxt">
+      <b id="hName">—</b>
+      <small id="hSub">—</small>
+    </div>
+    <button class="hbtn" id="btnProj" type="button">☰</button>
+    <button class="hbtn" id="btnLang" type="button">EN</button>
+  </div>
+  <div class="pbar"><i class="pd" id="barDone" style="width:0"></i><i class="pn" id="barNa" style="width:0"></i></div>
+</header>
+
+<main>
+  <section class="card meta">
+    <h2 id="lbMeta">Datos</h2>
+    <div class="grid2">
+      <div class="f full"><label id="lbTec">Técnico</label><input id="mTec" autocomplete="off"></div>
+      <div class="f"><label id="lbPrj">Proyecto</label><input id="mPrj" autocomplete="off"></div>
+      <div class="f"><label id="lbFec">Fecha</label><input id="mFec" type="date"></div>
+      <div class="f full"><label id="lbDir">Dirección</label><input id="mDir" autocomplete="off"></div>
+      <div class="f"><label id="lbMod">Marca / modelo BDA</label><input id="mMod" autocomplete="off"></div>
+      <div class="f"><label id="lbSn">S/N</label><input id="mSn" autocomplete="off"></div>
+    </div>
+    <div id="setup"></div>
+  </section>
+
+  <p class="warnbox" id="swarn" style="display:none"></p>
+  <p class="hint" id="lbHint"></p>
+
+  <div id="secs"></div>
+
+  <section class="card meta">
+    <h2 id="lbSign">Cierre</h2>
+    <div class="f"><label id="lbObs">Observaciones generales</label><textarea id="mObs"></textarea></div>
+  </section>
+
+  <section class="card meta" id="sendCard">
+    <h2 id="lbSend2">Enviar</h2>
+    <p class="sendto" id="sendTo"></p>
+    <button class="act pri big" id="btnAll" type="button"><span id="lbAll">Enviar PDF y fotos</span></button>
+    <p class="cap" id="sendCap"></p>
+    <div class="sendrow">
+      <button class="act" id="btnPdf2" type="button">PDF</button>
+      <button class="act" id="btnZip2" type="button">ZIP</button>
+    </div>
+  </section>
+</main>
+
+<div class="dock">
+  <div class="dinner">
+    <div class="dstat"><b id="dCount">0 / 127</b><small id="dSub">—</small></div>
+    <button class="act" id="btnZip" type="button">ZIP</button>
+    <button class="act pri" id="btnPdf" type="button">PDF</button>
+  </div>
+</div>
+
+<div class="sheet" id="sheet"><div class="in">
+  <h3 id="lbProjs">Proyectos</h3>
+  <div id="plist"></div>
+  <button class="act pri" id="btnNew" type="button" style="width:100%;margin-top:6px">+ <span id="lbNew">Nuevo proyecto</span></button>
+  <button class="act" id="btnClose" type="button" style="width:100%;margin-top:8px"><span id="lbClose">Cerrar</span></button>
+</div></div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════════
+   BDA Annual Inspection — Broward (copia del motor de campo v2.0)
+   Todo corre en el teléfono. Nada sale de aquí hasta que el técnico
+   genera el PDF o el ZIP. Sin internet, sin cuenta, sin librerías.
+   ═══════════════════════════════════════════════════════════════════════ */
+var DATA = {"version":"v1.0","fecha":"2026-10-19","secciones":[{"id":"A","es":"Fotos generales y rótulo","en":"Overall Photos & Sign","items":[{"id":"A1","ev":"foto","es":{"t":"Fotos generales del BDA instalado","h":"Que se vea todo el equipo."},"en":{"t":"Overall photos of the installed BDA","h":"The whole unit must be visible."},"slots":[{"id":"FRENTE","es":"De frente","en":"Front"},{"id":"LADO","es":"De lado","en":"Side"}],"ref":["R1","R11"]},{"id":"A2","ev":"foto","es":{"t":"Rótulo del permiso junto al BDA o en la BBU","h":"El rótulo dice Fire Dept. Signal Booster, el número de permiso y «Serviced by» con nombre y teléfono. Va junto al BDA, o en la BBU si el frente del BDA no da espacio. Tiene que leerse en la foto."},"en":{"t":"Permit sign next to the BDA or on the BBU","h":"The sign shows Fire Dept. Signal Booster, the permit number and “Serviced by” with name and phone. It goes next to the BDA, or on the BBU if the BDA front panel has no room. It must be legible in the photo."},"ref":["R11"]},{"id":"A3","ev":"foto","es":{"t":"Etiqueta del BDA con el número de serie (S/N)","h":"Foto de cerca. Si no puede leer el número en la pantalla, tómela otra vez."},"en":{"t":"BDA label with the serial number (S/N)","h":"Close-up. If you cannot read the number on your screen, retake it."},"ref":["R10"]}]},{"id":"B","es":"Filtros","en":"Filters","items":[{"id":"B1","ev":"foto","es":{"t":"Filtros instalados, con la etiqueta legible"},"en":{"t":"Installed filters, label legible"},"slots":[{"id":"DONANTE","es":"Filtro del lado donante","en":"Donor-side filter","si":{"filtros":["donor","both"]}},{"id":"DAS","es":"Filtro del lado DAS","en":"DAS-side filter","si":{"filtros":"both"}},{"id":"PUERTOS","es":"Puertos del BDA sin filtro","en":"BDA ports with no filter","si":{"filtros":"none"}}],"ref":["R1","R7"]}]},{"id":"C","es":"Baterías","en":"Batteries","items":[{"id":"C1","ev":"foto","es":{"t":"Cargador y baterías, con las fechas legibles","h":"Son dos datos distintos: la fecha de fabricación viene marcada de fábrica en la batería; la de instalación es la etiqueta que se pone al instalarla. Foto aparte para cada una."},"en":{"t":"Charger and batteries, with dates legible","h":"Two different data points: the manufacture date is stamped on the battery at the factory; the installation date is the label put on when it is installed. One photo for each."},"slots":[{"id":"FAB","es":"Fecha de fabricación","en":"Date of manufacture"},{"id":"INST","es":"Etiqueta de fecha de instalación","en":"Installation date label"}],"ref":["R10"]},{"id":"C2","ev":"dato","es":{"t":"Escriba las fechas de la batería","h":"Si la batería no tiene fecha de instalación, escriba «No tiene»."},"en":{"t":"Write down the battery dates","h":"If the battery has no installation date, write “None”."},"campos":[{"id":"fab","tipo":"texto","es":"Fecha de fabricación","en":"Date of manufacture","ph":"MM/AAAA"},{"id":"inst","tipo":"texto","es":"Fecha de instalación","en":"Date of installation","ph":"MM/AAAA"}],"ref":["R10"]}]},{"id":"D","es":"Tierras, pararrayos y antena","en":"Grounding, Lightning Protection & Antenna","items":[{"id":"D1","ev":"foto","es":{"t":"BDA aterrizado a la barra de tierra del cuarto BDA"},"en":{"t":"BDA grounded to the BDA room ground bar"},"ref":["R10"]},{"id":"D2","ev":"foto","es":{"t":"Polyphaser / pararrayos con la tierra asegurada"},"en":{"t":"Polyphaser / lightning protector with ground secured"},"ref":["R10"]},{"id":"D3","ev":"foto","es":{"t":"Techo: mástil con tierra y antena donante"},"en":{"t":"Roof: grounded mast and donor antenna"},"slots":[{"id":"MASTIL","es":"Mástil con la tierra asegurada","en":"Mast with ground secured"},{"id":"ANTENA","es":"Antena donante y su montaje","en":"Donor antenna and mount"},{"id":"ETIQ","es":"Etiqueta de la antena","en":"Antenna label"}],"ref":["R10"]}]},{"id":"E","es":"Capturas del GUI","en":"GUI Screenshots","items":[{"id":"E1","ev":"gui","es":{"t":"Captura de TODAS las páginas de configuración","h":"Broward pide todas. Si una página no cabe en la pantalla, tome más de una captura."},"en":{"t":"Screenshot of ALL settings pages","h":"Broward requires all of them. If a page does not fit on the screen, take more than one screenshot."},"slots":[{"id":"BW","es":"Ancho de banda de cada canal / banda","en":"Bandwidth of each channel / band"},{"id":"CANALES","es":"Canales / frecuencias activas","en":"Active channels / frequencies"},{"id":"GAIN","es":"Ganancia (gain), uplink y downlink","en":"Gain, uplink and downlink"},{"id":"POWER","es":"Potencia de salida (output power)","en":"Output power"},{"id":"ALARMAS","es":"Página de alarmas","en":"Alarms page"},{"id":"INFO","es":"Información del equipo (modelo, firmware, S/N)","en":"Device info (model, firmware, S/N)"},{"id":"OTRAS","es":"Cualquier otra página de configuración","en":"Any other settings page","opt":true}],"ref":["R2","R3","R9"]}]},{"id":"F","es":"Aislamiento (isolation)","en":"Isolation","items":[{"id":"F1","ev":"gui","es":{"t":"Captura de la página de aislamiento del GUI"},"en":{"t":"Screenshot of the GUI isolation page"},"si":{"iso_gui":"si"},"ref":["R4","R8"]},{"id":"F2","ev":"foto","es":{"t":"Mida el aislamiento y escriba los valores","h":"El GUI no lo muestra, así que el cálculo va en el reporte de inspección. En ganancia máxima escriba la que muestra el GUI; si la deja vacía se usa 90 dB."},"en":{"t":"Measure the isolation and enter the values","h":"The GUI does not show it, so the calculation goes in the inspection report. For maximum gain enter the value shown in the GUI; if left blank, 90 dB is used."},"si":{"iso_gui":"no"},"slots":[{"id":"MAN","es":"Lectura en el analizador","en":"Analyzer reading"}],"iso":{"band":"700/800","gain":90},"ref":["R4","R8"]}]},{"id":"G","es":"Último grid survey","en":"Last Grid Survey","items":[{"id":"G1","ev":"dato","es":{"t":"Busque la fecha del commissioning y del último grid survey","h":"Búsquelas en el cuarto BDA: etiqueta del equipo, binder o placa. Si no las encuentra, escriba «No se encontró». Según el inspector, NFPA pide un grid survey completo no antes de 3 años y no después de 5 años desde el commissioning. Si pasaron más de 5 años o no se sabe, avise a la oficina."},"en":{"t":"Find the commissioning and last grid survey dates","h":"Look in the BDA room: equipment label, binder or plaque. If not found, write “Not found”. Per the inspector, NFPA requires a full grid survey no less than 3 years and no more than 5 years from commissioning. If more than 5 years have passed or the date is unknown, notify the office."},"campos":[{"id":"com","tipo":"texto","es":"Fecha de commissioning","en":"Commissioning date","ph":"MM/AAAA"},{"id":"grid","tipo":"texto","es":"Fecha del último grid survey","en":"Last grid survey date","ph":"MM/AAAA"},{"id":"donde","tipo":"texto","es":"Dónde se encontró","en":"Where it was found","ph":"binder, etiqueta…"}],"ref":["R12"]}]},{"id":"H","es":"Clase y ancho de banda","en":"Class & Bandwidth","items":[{"id":"H1","ev":"dato","es":{"t":"Clase del BDA y ancho de banda","h":"Sáquelo del GUI o de la etiqueta del equipo. Si no está seguro, marque «No se sabe». Broward prefiere Clase A."},"en":{"t":"BDA class and bandwidth","h":"Take it from the GUI or the equipment label. If unsure, mark “Unknown”. Broward prefers Class A."},"campos":[{"id":"clase","tipo":"opcion","es":"Clase actual","en":"Current class","ops":[{"v":"A","es":"Clase A","en":"Class A"},{"v":"B","es":"Clase B","en":"Class B"}]},{"id":"6mhz","tipo":"opcion","es":"¿Soporta 6 MHz?","en":"Supports 6 MHz?","ops":[{"v":"si","es":"Sí","en":"Yes"},{"v":"no","es":"No","en":"No"},{"v":"ns","es":"No se sabe","en":"Unknown"}]},{"id":"pasarA","tipo":"opcion","es":"¿Se puede pasar a Clase A?","en":"Can it be upgraded to Class A?","ops":[{"v":"si","es":"Sí","en":"Yes"},{"v":"no","es":"No","en":"No"},{"v":"ns","es":"No se sabe","en":"Unknown"}]}],"ref":["R5","R6","R13"]},{"id":"H2","ev":"check","es":{"t":"Los filtros instalados cumplen la regla de Broward","h":"⛔ Si soporta 6 MHz: 1 filtro, lado donante. Si NO soporta 6 MHz: 2 filtros, donante + DAS. Si no cumple, llame a la oficina antes de irse del sitio."},"en":{"t":"Installed filters meet the Broward rule","h":"⛔ If it supports 6 MHz: 1 filter, donor side. If it does NOT support 6 MHz: 2 filters, donor + DAS. If it does not comply, call the office before leaving the site."},"ref":["R7"]}]}],"setup":[{"id":"iso_gui","es":"¿El GUI de este BDA muestra el aislamiento?","en":"Does this BDA's GUI show isolation?","label_en":"GUI SHOWS ISOLATION","tipo":"opciones","ops":[{"v":"si","es":"Sí","en":"Yes"},{"v":"no","es":"No","en":"No"}],"def_":"no","nota_es":"Si lo muestra, solo se pide la captura. Si no, hay que medirlo y la app hace el cálculo.","nota_en":"If it does, only the screenshot is needed. If not, it must be measured and the app does the math."},{"id":"filtros","es":"¿Qué filtros tiene el sitio?","en":"Which filters does the site have?","label_en":"FILTERS ON SITE","tipo":"opciones","ops":[{"v":"donor","es":"Solo lado donante","en":"Donor side only"},{"v":"both","es":"Donante + DAS","en":"Donor + DAS"},{"v":"none","es":"Ninguno","en":"None"}],"def_":"donor","nota_es":"Cambia las fotos que pide B1. Si no hay ninguno, se pide foto de los puertos.","nota_en":"Changes the photos B1 asks for. If there are none, a photo of the ports is required."}],"refs":[{"id":"R1","mail":1,"q":"When we implemented the new filter policies, we required photos of the Bi-Directional Amplifier (BDA) to verify that the necessary filters have been installed."},{"id":"R2","mail":1,"q":"Additionally, we also required GUI screenshots of the booster configurations. We use these to confirm: Bandwidth and active settings etc. to verify specific equipment capabilities."},{"id":"R3","mail":1,"q":"Configuration alignment to ensure everything is set correctly and matches the historical readings we keep on file."},{"id":"R4","mail":1,"q":"Isolation readings if the BDA doesn’t have this in the GUI it, (the ISO calculations) should be provided in the email.","note_en":"Superseded by R8: the isolation now goes in the inspection report.","note_es":"Reemplazado por R8: el aislamiento ahora va en el reporte de inspección."},{"id":"R5","mail":1,"q":"Class Designation: Since this is currently a Class B device, are you able to upgrade it to Class A without incurring any additional costs?","note_en":"The technician records whether it can be upgraded; the office confirms the cost.","note_es":"El técnico anota si se puede pasar a Clase A; la oficina confirma el costo."},{"id":"R6","mail":1,"q":"Bandwidth & Filtering: If it must remain a Class B device, can it support a 6MHz bandwidth?"},{"id":"R7","mail":1,"q":"The previous policy only required a single donor-side filter. The new policy dictates that if the device cannot support 6MHz, a second filter is required on the DAS side."},{"id":"R8","mail":2,"q":"Isolation reading GUI shot, if the BDA doesn’t have this in the GUI it, (the ISO calculations) should be provided in the inspection report."},{"id":"R9","mail":2,"q":"We are missing the GUI shots of all the BDA settings these should be provided in the inspection report."},{"id":"R10","mail":2,"q":"Missing photos of the BDA S/N , batter dates(date of manuf, date of install), grounds (roof , BDA room), antenna, lightning protectors should be in inspection report."},{"id":"R11","mail":2,"q":"Overall photos of the BDA, and showing the permit plaq on the door etc, should be in inspection report.","note_en":"The permit sign is installed next to the BDA / on the BBU, not on the door. The photo shows it there.","note_es":"El rótulo del permiso está junto al BDA / en la BBU, no en la puerta. La foto lo muestra ahí."},{"id":"R12","mail":2,"q":"Can you please check when the last Grid survey was done? NFPA requires a full grid survey to be conducted no less than 3 years and no more than 5 years from commissioning.","note_en":"If the technician did not find the dates on site, the office must confirm them before submitting.","note_es":"Si el técnico no encontró las fechas en el sitio, la oficina las confirma antes de enviar."},{"id":"R13","mail":2,"q":"Can this BDA do class A without incurring any expense? Our preferred configuration has been Class A .","note_en":"The technician records whether it can be upgraded; the office confirms the cost.","note_es":"El técnico anota si se puede pasar a Clase A; la oficina confirma el costo."}],"mails":{"1":"Oct 6, 2026","2":"Oct 19, 2026"},"total":15};
+
+var T = {
+  es: {
+    meta:"Datos", prj:"Proyecto", tec:"Técnico", fec:"Fecha", dir:"Dirección", mod:"Marca / modelo BDA", sn:"Número de serie (S/N)", sign:"Cierre",
+    obs:"Observaciones generales", projs:"Proyectos", nw:"Nuevo proyecto",
+    close:"Cerrar", add:"Agregar foto", addv:"Agregar video o foto",
+    note:"Nota", na:"N/A", of:"de", done:"listos", naS:"N/A",
+    empty:"Sin datos del proyecto", untitled:"Proyecto sin nombre",
+    delp:"¿Borrar este proyecto y todas sus fotos?", del:"Borrar",
+    open:"Abrir", pdfing:"Armando el PDF…", zipping:"Armando el ZIP…",
+    nofiles:"Todavía no hay fotos que empaquetar.",
+    saved:"Guardado", bigfile:"Ese archivo pesa mucho — mejor uno más corto.",
+    pdfok:"PDF listo", zipok:"ZIP listo", err:"No se pudo guardar el archivo.",
+    photos:"fotos", summary:"RESUMEN", nonote:"sin nota",
+    st_done:"HECHO", st_na:"N/A", st_pend:"PENDIENTE",
+    hint:"Toca el <b>cuadro grande</b> de cada ítem para marcarlo hecho. Tócalo otra vez si <b>no aplica</b>, y una tercera vez para dejarlo pendiente.",
+    pdftitle:"INSPECCIÓN ANUAL BDA — BROWARD", pend:"pendientes",
+    addmany:"Agregar fotos",
+    inj:"dB inyectados", gen:"con generador", rx:"Señal recibida", gain:"Ganancia máxima",
+    thr:"umbral", iso_ok:"AÍSLA", iso_edge:"AL FILO", iso_bad:"NO AÍSLA",
+    warn_ls:"⚠️ Este teléfono no está guardando las fotos. Las marcas y las notas sí se conservan, pero las FOTOS se pierden si cierras esta página. Manda el PDF y el ZIP antes de salir.",
+    warn_mem:"⚠️ Este teléfono no está guardando NADA. Puedes trabajar normal, pero si cierras la página pierdes todo. Manda el PDF y el ZIP antes de salir.",
+    send:"Enviar", sending:"Abriendo para enviar…", sent:"Listo",
+    nosave:"Tu navegador no dejó guardar el archivo. Prueba con el otro botón o desde una computadora.",
+    send2:"Enviar", sendall:"Enviar PDF y fotos",
+    sendto:"Al terminar, manda las <b>dos cosas</b>: el PDF para revisar y el ZIP con las fotos sueltas para el binder.",
+    can_share:"✓ Este teléfono sí puede enviar. Al tocar el botón se abre la hoja de compartir — elige WhatsApp o Correo y mándaselo.",
+    no_share:"⚠️ Este teléfono NO deja enviar archivos desde aquí. Los botones van a intentar abrir el archivo para que lo guardes a mano. Si tampoco, haz el trabajo desde una computadora.",
+    sep:"O manda uno por uno:"
+  },
+  en: {
+    meta:"Details", prj:"Project", tec:"Technician", fec:"Date", dir:"Address", mod:"BDA make / model", sn:"Serial number (S/N)", sign:"Sign-off",
+    obs:"General notes", projs:"Projects", nw:"New project",
+    close:"Close", add:"Add photo", addv:"Add video or photo",
+    note:"Note", na:"N/A", of:"of", done:"done", naS:"N/A",
+    empty:"No project details yet", untitled:"Untitled project",
+    delp:"Delete this project and all its photos?", del:"Delete",
+    open:"Open", pdfing:"Building the PDF…", zipping:"Building the ZIP…",
+    nofiles:"No photos to package yet.",
+    saved:"Saved", bigfile:"That file is large — a shorter one works better.",
+    pdfok:"PDF ready", zipok:"ZIP ready", err:"The file could not be saved.",
+    photos:"photos", summary:"SUMMARY", nonote:"no note",
+    st_done:"DONE", st_na:"N/A", st_pend:"PENDING",
+    hint:"Tap the <b>big box</b> on each item to mark it done. Tap again if it <b>does not apply</b>, and a third time to leave it pending.",
+    pdftitle:"BDA ANNUAL INSPECTION — BROWARD", pend:"pending",
+    addmany:"Add photos",
+    inj:"dB injected", gen:"with generator", rx:"Received signal", gain:"Maximum gain",
+    thr:"threshold", iso_ok:"ISOLATED", iso_edge:"AT THE EDGE", iso_bad:"NOT ISOLATED",
+    warn_ls:"⚠ This phone is not storing photos. Your marks and notes are kept, but the PHOTOS are lost if you close this page. Send the PDF and the ZIP before you leave.",
+    warn_mem:"⚠ This phone is not storing ANYTHING. You can work normally, but closing the page loses it all. Send the PDF and the ZIP before you leave.",
+    send:"Send", sending:"Opening to send…", sent:"Done",
+    nosave:"Your browser would not save the file. Try the other button, or do it from a computer.",
+    send2:"Send", sendall:"Send PDF and photos",
+    sendto:"When you finish, send <b>both</b>: the PDF to review and the ZIP with the loose photos for the binder.",
+    can_share:"✓ This phone can send. Tapping the button opens the share sheet — pick WhatsApp or Mail and send it.",
+    no_share:"⚠ This phone will NOT send files from here. The buttons will try to open the file so you can save it by hand. If that fails too, do this from a computer.",
+    sep:"Or send them one at a time:"
+  }
+};
+
+/* Protegido: en navegacion privada del iPhone el solo hecho de LEER
+   localStorage lanza una excepcion, y sin este try el script entero muere
+   antes de dibujar nada. */
+var L = 'es';
+try { L = localStorage.getItem('bwa_lang') || 'es'; } catch (e) {}
+var t = function () { return T[L]; };
+/* ═══════════════════════════════════════════════════════════════════════
+   Almacenamiento en tres escalones.
+
+   Safari en el iPhone BLOQUEA IndexedDB cuando la pagina se abre como
+   archivo local (file://), y tambien en navegacion privada. La primera
+   version daba IndexedDB por hecho y por eso la lista no se dibujaba en el
+   telefono. Ahora nunca se depende de el:
+
+     1. IndexedDB   — lo mejor: fotos y proyectos sobreviven al cierre
+     2. localStorage — sin fotos (no caben), pero el checklist se conserva
+     3. memoria      — el checklist FUNCIONA igual; se pierde al cerrar,
+                       y se le avisa al tecnico en pantalla
+
+   Ninguna funcion de aqui rechaza nunca. Si algo falla, baja de escalon.
+   ═══════════════════════════════════════════════════════════════════════ */
+var STORE = { mode: 'mem', why: '' };
+var MEM = { proj: {}, file: {} };
+
+function idbOpen() {
+  return new Promise(function (res, rej) {
+    var idb;
+    try { idb = window.indexedDB; } catch (e) { idb = null; }
+    if (!idb) { rej(new Error('sin indexedDB')); return; }
+    var r;
+    try { r = idb.open('bda_annual_bwd', 1); } catch (e) { rej(e); return; }
+    var done = false;
+    var kill = setTimeout(function () { if (!done) { done = true; rej(new Error('timeout')); } }, 1500);
+    r.onupgradeneeded = function (e) {
+      var d = e.target.result;
+      if (!d.objectStoreNames.contains('proj')) d.createObjectStore('proj', { keyPath: 'id' });
+      if (!d.objectStoreNames.contains('file')) {
+        d.createObjectStore('file', { keyPath: 'fid' }).createIndex('by_proj', 'pid');
+      }
+    };
+    r.onsuccess = function () { if (done) return; done = true; clearTimeout(kill); res(r.result); };
+    r.onerror = function () { if (done) return; done = true; clearTimeout(kill); rej(r.error || new Error('idb')); };
+    r.onblocked = function () { if (done) return; done = true; clearTimeout(kill); rej(new Error('blocked')); };
+  });
+}
+
+var DB = null;
+function initStore() {
+  return idbOpen().then(function (d) {
+    DB = d; STORE.mode = 'idb';
+  }).catch(function (e) {
+    STORE.why = (e && e.message) || 'idb';
+    var ok = false;
+    try { localStorage.setItem('_t', '1'); localStorage.removeItem('_t'); ok = true; } catch (e2) {}
+    STORE.mode = ok ? 'ls' : 'mem';
+  });
+}
+
+function lsGet(store) {
+  try { return JSON.parse(localStorage.getItem('bwa_' + store) || '{}'); } catch (e) { return {}; }
+}
+function lsSet(store, obj) {
+  try { localStorage.setItem('bwa_' + store, JSON.stringify(obj)); return true; }
+  catch (e) { return false; }
+}
+
+function put(store, val) {
+  if (STORE.mode === 'idb') {
+    return new Promise(function (res) {
+      try {
+        var os = DB.transaction(store, 'readwrite').objectStore(store);
+        var q = os.put(val);
+        q.onsuccess = function () { res(true); };
+        q.onerror = function () { res(false); };
+      } catch (e) { res(false); }
+    });
+  }
+  var key = store === 'proj' ? 'id' : 'fid';
+  if (store === 'file') { MEM.file[val[key]] = val; return Promise.resolve(true); }  // las fotos nunca a localStorage
+  if (STORE.mode === 'ls') {
+    var m = lsGet(store); m[val[key]] = val;
+    if (lsSet(store, m)) return Promise.resolve(true);
+    STORE.mode = 'mem'; paintStoreWarn();
+  }
+  MEM[store][val[key]] = val;
+  return Promise.resolve(true);
+}
+
+function del(store, key) {
+  if (STORE.mode === 'idb') {
+    return new Promise(function (res) {
+      try {
+        var q = DB.transaction(store, 'readwrite').objectStore(store).delete(key);
+        q.onsuccess = function () { res(); }; q.onerror = function () { res(); };
+      } catch (e) { res(); }
+    });
+  }
+  if (STORE.mode === 'ls' && store !== 'file') { var m = lsGet(store); delete m[key]; lsSet(store, m); }
+  delete MEM[store][key];
+  return Promise.resolve();
+}
+
+function all(store, idx, key) {
+  if (STORE.mode === 'idb') {
+    return new Promise(function (res) {
+      try {
+        var os = DB.transaction(store, 'readonly').objectStore(store);
+        var src = idx ? os.index(idx) : os;
+        var q = src.getAll(key === undefined ? undefined : key);
+        q.onsuccess = function () { res(q.result || []); };
+        q.onerror = function () { res([]); };
+      } catch (e) { res([]); }
+    });
+  }
+  var src2 = (STORE.mode === 'ls' && store !== 'file') ? lsGet(store) : MEM[store];
+  var out = Object.keys(src2).map(function (k) { return src2[k]; });
+  if (idx === 'by_proj') out = out.filter(function (x) { return x.pid === key; });
+  return Promise.resolve(out);
+}
+
+/* ── aviso en pantalla cuando el telefono no esta guardando bien */
+function paintStoreWarn() {
+  var el = document.getElementById('swarn');
+  if (!el) return;
+  if (STORE.mode === 'idb') { el.style.display = 'none'; return; }
+  el.style.display = '';
+  el.textContent = STORE.mode === 'ls' ? t().warn_ls : t().warn_mem;
+}
+
+/* ───────────────────────────────────────────── estado */
+/* Si el tecnico ya empezo a trabajar, la carga tardia del almacenamiento NO
+   debe pisarle lo hecho. En un telefono lento IndexedDB puede tardar segundos
+   en contestar, y sin esta bandera la primera foto o la primera marca se
+   perdian al terminar de arrancar. */
+var TOUCHED = false;
+
+var P = null;      // proyecto activo
+var FILES = [];    // archivos del proyecto activo
+var PROJS = [];
+
+function newProj() {
+  var d = new Date();
+  var iso = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  return { id: 'p' + Date.now() + Math.floor(Math.random() * 1e4), prj: '', tec: '', fec: iso,
+           dir: '', mod: '', sn: '',
+           obs: '', st: {}, nt: {}, val: {}, cfg: {}, upd: Date.now() };
+}
+function save() { TOUCHED = true; P.upd = Date.now(); return put('proj', P); }
+
+/* ───────────────────────────────────────────── utilidades */
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+var _toast;
+function toast(m) {
+  clearTimeout(_toast);
+  var e = document.getElementById('tst');
+  if (!e) { e = document.createElement('div'); e.id = 'tst'; e.className = 'toast'; document.body.appendChild(e); }
+  e.textContent = m; e.classList.remove('hide');
+  _toast = setTimeout(function () { e.classList.add('hide'); }, 2600);
+}
+
+/* redimensiona una foto a 1600 px de lado mayor y la vuelve JPEG */
+function shrink(file) {
+  return new Promise(function (res) {
+    if (!/^image\//.test(file.type)) { res({ blob: file, w: 0, h: 0, video: true }); return; }
+    var url = URL.createObjectURL(file);
+    var img = new Image();
+    img.onload = function () {
+      var M = 1600, w = img.width, h = img.height;
+      if (w > M || h > M) { var k = M / Math.max(w, h); w = Math.round(w * k); h = Math.round(h * k); }
+      var c = document.createElement('canvas'); c.width = w; c.height = h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h);
+      URL.revokeObjectURL(url);
+      c.toBlob(function (b) { res({ blob: b || file, w: w, h: h, video: false }); }, 'image/jpeg', 0.72);
+    };
+    img.onerror = function () { URL.revokeObjectURL(url); res({ blob: file, w: 0, h: 0, video: false }); };
+    img.src = url;
+  });
+}
+
+/* ───────────────────────────────────────────── render */
+/* ═══════════════════════════════════════════════════════════════════════
+   Que items existen en ESTE proyecto.
+   Las preguntas de configuracion de la anual (aislamiento en el GUI y
+   filtros del sitio) deciden. Lo que no aplica NO se dibuja — no cuenta como
+   pendiente ni como N/A, simplemente no existe. Andres, 2026-08-28.
+   ═══════════════════════════════════════════════════════════════════════ */
+/* Generalizado para la anual: cualquier clave de `si` se compara contra la
+   respuesta de esa pregunta (o su valor por defecto). El valor de `si` puede
+   ser uno solo o una lista de valores permitidos. */
+function setupQ(k) {
+  for (var a = 0; a < DATA.setup.length; a++) if (DATA.setup[a].id === k) return DATA.setup[a];
+  return null;
+}
+function cfg(k) {
+  var c = (P && P.cfg) || {};
+  if (c[k] !== undefined) return c[k];
+  var q = setupQ(k);
+  return q ? q.def_ : undefined;
+}
+function applies(o) {
+  if (!o || !o.si) return true;
+  var s = o.si, keys = Object.keys(s);
+  for (var a = 0; a < keys.length; a++) {
+    var want = s[keys[a]], have = String(cfg(keys[a]));
+    if (Array.isArray(want)) { if (want.map(String).indexOf(have) < 0) return false; }
+    else if (String(want) !== have) return false;
+  }
+  return true;
+}
+function slotsOf(i) {
+  return (i.slots || []).filter(applies);
+}
+function visibleItems() {
+  var out = [];
+  DATA.secciones.forEach(function (s) {
+    s.items.forEach(function (i) { if (applies(i)) out.push({ sec: s.id, it: i }); });
+  });
+  return out;
+}
+
+function stateOf(id) { return (P.st && P.st[id]) || 0; }   // 0 pend · 1 ok · 2 na
+function filesOf(id, slot) {
+  return FILES.filter(function (f) {
+    return f.iid === id && (slot === undefined || (f.slot || '') === slot);
+  });
+}
+function valOf(id) { return (P.val && P.val[id]) || {}; }
+function setVal(id, k, v) {
+  if (!P.val) P.val = {};
+  if (!P.val[id]) P.val[id] = {};
+  P.val[id][k] = v;
+  save();
+}
+
+function counts() {
+  var ok = 0, na = 0, vis = visibleItems();
+  vis.forEach(function (x) { var s = stateOf(x.it.id); if (s === 1) ok++; else if (s === 2) na++; });
+  return { ok: ok, na: na, tot: vis.length };
+}
+
+function paintProgress() {
+  var c = counts();
+  document.getElementById('barDone').style.width = (c.tot ? c.ok / c.tot * 100 : 0) + '%';
+  document.getElementById('barNa').style.width = (c.tot ? c.na / c.tot * 100 : 0) + '%';
+  document.getElementById('dCount').textContent = c.ok + ' / ' + c.tot;
+  var pend = c.tot - c.ok - c.na;
+  document.getElementById('dSub').textContent =
+    c.na + ' ' + t().naS + ' · ' + pend + ' ' + t().pend + ' · ' + FILES.length + ' ' + t().photos;
+  DATA.secciones.forEach(function (s) {
+    var el = document.getElementById('sec-' + s.id);
+    if (!el) return;
+    var o = 0, n = 0, tt = 0;
+    s.items.forEach(function (i) {
+      if (!applies(i)) return;
+      tt++; var st = stateOf(i.id); if (st === 1) o++; else if (st === 2) n++;
+    });
+    el.querySelector('.scnt').textContent = o + ' / ' + tt + (n ? ' · ' + n + ' ' + t().naS : '');
+    el.classList.toggle('done', tt > 0 && o + n === tt);
+  });
+}
+
+/* ─────────────────────────────────────────── isolation
+   Isolation = dB inyectados − señal recibida (dBm).
+   Con +35 inyectados y −80 recibidos: 35 − (−80) = 115 dB.
+   Umbral = ganancia máxima del equipo + 20 dB (estándar interno de Skylight;
+   los márgenes oficiales de las ciudades son más bajos, así que este es el
+   conservador). 700/800 → 90+20 = 110. 450 → 95+20 = 115.               */
+function isoCalc(i) {
+  var v = valOf(i.id);
+  var inj = v.inj === undefined ? 35 : Number(v.inj);
+  var gain = v.gain === undefined ? i.iso.gain : Number(v.gain);
+  var rx = v.rx === '' || v.rx === undefined ? null : Number(v.rx);
+  if (rx === null || isNaN(rx) || isNaN(inj) || isNaN(gain)) return { inj: inj, gain: gain, iso: null, thr: gain + 20 };
+  return { inj: inj, gain: gain, rx: rx, iso: inj - rx, thr: gain + 20 };
+}
+
+function itemHTML(i) {
+  var st = stateOf(i.id), lang = i[L] || i.es;
+  var warn = /⛔/.test(lang.h || '');
+  var evl = i.ev === 'video' ? 'VIDEO' : (i.ev === 'check' ? (L === 'es' ? 'CONFIRMAR' : 'CONFIRM')
+          : i.ev === 'dato' ? (L === 'es' ? 'ANOTAR' : 'RECORD')
+          : i.ev === 'gui' ? (L === 'es' ? 'CAPTURA' : 'SCREENSHOT')
+          : (L === 'es' ? 'FOTO' : 'PHOTO'));
+  var h = '<div class="it ' + (st === 1 ? 'ok' : st === 2 ? 'na' : '') + '" data-id="' + esc(i.id) + '">' +
+    '<button class="state" type="button" data-act="cycle" aria-label="' + esc(i.id) + '">' +
+      (st === 1 ? '✓' : st === 2 ? 'N/A' : '') + '</button>' +
+    '<div class="ibody">' +
+      '<div class="irow1"><span class="iid">' + esc(i.id) + '</span>' +
+      '<span class="ev ' + (i.ev === 'check' || i.ev === 'dato' ? 'doc' : 'foto') + '">' + evl + '</span></div>' +
+      '<span class="t">' + esc(lang.t) + '</span>' +
+      (lang.h ? '<span class="h' + (warn ? ' warn' : '') + '">' + esc(lang.h) + '</span>' : '');
+
+  /* fotos: con nombre propio si el item define slots, si no un solo boton */
+  var sl = slotsOf(i);
+  if (sl.length) {
+    sl.forEach(function (s) {
+      h += '<div class="slot"><div class="slabel">' + esc(s[L]) + '</div>' +
+           '<button class="tb add" type="button" data-act="add" data-slot="' + esc(s.id) + '">+</button>' +
+           '<div class="thumbs" data-thumbs="' + esc(s.id) + '"></div></div>';
+    });
+    h += '<div class="tools"><button class="tb" type="button" data-act="note">✎ ' + esc(t().note) + '</button></div>';
+  } else {
+    h += '<div class="tools">' +
+      (i.ev === 'check' || i.ev === 'dato' ? '' :
+        '<button class="tb add" type="button" data-act="add">+ ' + esc(i.ev === 'gui' ? t().addmany : t().add) + '</button>') +
+      '<button class="tb" type="button" data-act="note">✎ ' + esc(t().note) + '</button></div>' +
+      '<div class="thumbs" data-thumbs=""></div>';
+  }
+
+  /* campo numerico con criterio */
+  if (i.num) {
+    h += '<div class="numrow"><label>' + esc(i.num['label_' + L]) + '</label>' +
+      '<input class="numin" type="text" inputmode="decimal" data-num placeholder="—">' +
+      '<span class="verdict" data-verdict></span></div>';
+  }
+
+  /* campos de texto y de opcion (nuevo en la anual) */
+  if (i.campos) {
+    i.campos.forEach(function (c) {
+      if (c.tipo === 'opcion') {
+        h += '<div class="cmp"><label>' + esc(c[L]) + '</label><div class="sops">' +
+          c.ops.map(function (o) {
+            return '<button class="sop" type="button" data-cmp="' + esc(c.id) + '" data-cv="' + esc(String(o.v)) + '">' +
+              esc(o[L]) + '</button>';
+          }).join('') + '</div></div>';
+      } else {
+        h += '<div class="cmp"><label>' + esc(c[L]) + '</label>' +
+          '<input class="cmpin" type="text" autocomplete="off" data-cmp="' + esc(c.id) + '" placeholder="' + esc(c.ph || '') + '"></div>';
+      }
+    });
+  }
+
+  /* modulo de isolation */
+  if (i.iso) {
+    h += '<div class="iso">' +
+      '<div class="isoband">' + esc(i.iso.band) + ' MHz</div>' +
+      '<div class="isoq">' + esc(t().inj) + '</div>' +
+      '<div class="isoradios">' +
+        '<button class="rb" type="button" data-inj="35">35 dB</button>' +
+        '<button class="rb" type="button" data-inj="10">10 dB <span>' + esc(t().gen) + '</span></button>' +
+      '</div>' +
+      '<div class="numrow"><label>' + esc(t().rx) + '</label>' +
+        '<input class="numin" type="text" inputmode="text" data-iso="rx" placeholder="-80"><span class="u">dBm</span></div>' +
+      '<div class="numrow"><label>' + esc(t().gain) + '</label>' +
+        '<input class="numin" type="text" inputmode="decimal" data-iso="gain" placeholder="' + i.iso.gain + '"><span class="u">dB</span></div>' +
+      '<div class="isoout" data-isoout></div>' +
+      '</div>';
+  }
+
+  h += '<textarea class="note hide" data-note placeholder="' + esc(t().note) + '"></textarea>' +
+    '</div></div>';
+  return h;
+}
+
+function thumbBox(box, id, slot) {
+  box.innerHTML = '';
+  filesOf(id, slot).forEach(function (f) {
+    var d = document.createElement('div'); d.className = 'th';
+    if (f.video) {
+      d.innerHTML = '<div class="vid">▶<br>VIDEO</div>';
+    } else {
+      var im = document.createElement('img'); im.alt = id; im.src = URL.createObjectURL(f.blob);
+      im.onload = function () { URL.revokeObjectURL(im.src); };
+      d.appendChild(im);
+    }
+    var b = document.createElement('button'); b.type = 'button'; b.textContent = '×';
+    b.setAttribute('aria-label', 'x');
+    b.onclick = function () {
+      del('file', f.fid).then(function () {
+        FILES = FILES.filter(function (q) { return q.fid !== f.fid; });
+        paintItem(id); paintProgress();
+      });
+    };
+    d.appendChild(b); box.appendChild(d);
+  });
+}
+
+function paintItem(id) {
+  var row = document.querySelector('.it[data-id="' + CSS.escape(id) + '"]');
+  if (!row) return;
+  var st = stateOf(id);
+  row.classList.toggle('ok', st === 1);
+  row.classList.toggle('na', st === 2);
+  row.querySelector('.state').textContent = st === 1 ? '✓' : st === 2 ? 'N/A' : '';
+  row.querySelectorAll('[data-thumbs]').forEach(function (box) {
+    thumbBox(box, id, box.getAttribute('data-thumbs'));
+  });
+  var nt = row.querySelector('[data-note]');
+  var v = (P.nt && P.nt[id]) || '';
+  nt.value = v;
+  if (v) nt.classList.remove('hide');
+
+  var it = itemById(id), vals = valOf(id);
+
+  if (it && it.num) {
+    var inp = row.querySelector('[data-num]');
+    if (document.activeElement !== inp) inp.value = vals.v === undefined ? '' : vals.v;
+    var ver = row.querySelector('[data-verdict]');
+    var n = parseFloat(String(vals.v).replace(',', '.'));
+    if (isNaN(n)) { ver.textContent = ''; ver.className = 'verdict'; }
+    else if (n < it.num.max) { ver.textContent = it.num['ok_' + L]; ver.className = 'verdict good'; }
+    else { ver.textContent = it.num['bad_' + L]; ver.className = 'verdict bad'; }
+  }
+
+  if (it && it.campos) {
+    row.querySelectorAll('input[data-cmp]').forEach(function (el) {
+      var k = el.getAttribute('data-cmp');
+      if (document.activeElement !== el) el.value = vals[k] === undefined ? '' : vals[k];
+    });
+    row.querySelectorAll('[data-cv]').forEach(function (b) {
+      b.classList.toggle('on', String(vals[b.getAttribute('data-cmp')]) === b.getAttribute('data-cv'));
+    });
+  }
+
+  if (it && it.iso) {
+    var r = isoCalc(it);
+    row.querySelectorAll('[data-inj]').forEach(function (b) {
+      b.classList.toggle('on', Number(b.dataset.inj) === r.inj);
+    });
+    var rxi = row.querySelector('[data-iso="rx"]');
+    var gi = row.querySelector('[data-iso="gain"]');
+    if (document.activeElement !== rxi) rxi.value = vals.rx === undefined ? '' : vals.rx;
+    if (document.activeElement !== gi) gi.value = vals.gain === undefined ? '' : vals.gain;
+    var out = row.querySelector('[data-isoout]');
+    if (r.iso === null) {
+      out.className = 'isoout';
+      out.innerHTML = '<span class="thr">' + t().thr + ' ' + r.thr + ' dB</span>';
+    } else {
+      var pass = r.iso > r.thr, edge = r.iso === r.thr;
+      out.className = 'isoout ' + (pass ? 'good' : edge ? 'edge' : 'bad');
+      out.innerHTML = '<b>' + r.iso.toFixed(1).replace('.0', '') + ' dB</b>' +
+        '<span class="thr">' + t().thr + ' ' + r.thr + ' dB</span>' +
+        '<span class="vd">' + (pass ? t().iso_ok : edge ? t().iso_edge : t().iso_bad) + '</span>';
+    }
+  }
+}
+
+function itemById(id) {
+  for (var a = 0; a < DATA.secciones.length; a++) {
+    var s = DATA.secciones[a];
+    for (var b = 0; b < s.items.length; b++) if (s.items[b].id === id) return s.items[b];
+  }
+  return null;
+}
+
+function render() {
+  var h = '';
+  DATA.secciones.forEach(function (s) {
+    var items = s.items.filter(applies);
+    if (!items.length) return;
+    h += '<details class="sec" id="sec-' + s.id + '">' +
+      '<summary class="shead"><span class="sid">' + esc(s.id) + '</span>' +
+      '<span class="stx"><b>' + esc(s[L]) + '</b><small class="scnt"></small></span>' +
+      '<span class="chev">›</span></summary>' +
+      '<div class="sbody">' + items.map(itemHTML).join('') + '</div></details>';
+  });
+  document.getElementById('secs').innerHTML = h;
+  visibleItems().forEach(function (x) { paintItem(x.it.id); });
+  paintProgress();
+}
+
+/* ─────────────────────────────────────────── preguntas de configuracion */
+function renderSetup() {
+  var h = '';
+  DATA.setup.forEach(function (q) {
+    h += '<div class="setq"><div class="sq">' + esc(q[L]) + '</div><div class="sops">' +
+      q.ops.map(function (o) {
+        var on = String(cfg(q.id)) === String(o.v);
+        return '<button class="sop' + (on ? ' on' : '') + '" type="button" data-q="' + esc(q.id) +
+          '" data-v="' + esc(String(o.v)) + '">' + esc(o[L]) + '</button>';
+      }).join('') +
+      '</div><div class="sn">' + esc(q['nota_' + L]) + '</div></div>';
+  });
+  var box = document.getElementById('setup');
+  box.innerHTML = h;
+  box.querySelectorAll('[data-q]').forEach(function (b) {
+    b.onclick = function () {
+      if (!P.cfg) P.cfg = {};
+      var q = setupQ(b.dataset.q), v = b.dataset.v;
+      var op = q ? q.ops.filter(function (o) { return String(o.v) === v; })[0] : null;
+      P.cfg[b.dataset.q] = op ? op.v : v;
+      save(); renderSetup(); render();
+    };
+  });
+}
+
+function paintLang() {
+  var k = t();
+  document.getElementById('btnLang').textContent = L === 'es' ? 'EN' : 'ES';
+  document.getElementById('lbMeta').textContent = k.meta;
+  document.getElementById('lbPrj').textContent = k.prj;
+  document.getElementById('lbTec').textContent = k.tec;
+  document.getElementById('lbFec').textContent = k.fec;
+  document.getElementById('lbDir').textContent = k.dir;
+  document.getElementById('lbMod').textContent = k.mod;
+  document.getElementById('lbSn').textContent = k.sn;
+  document.getElementById('lbSign').textContent = k.sign;
+  document.getElementById('lbObs').textContent = k.obs;
+  document.getElementById('lbHint').innerHTML = k.hint;
+  document.getElementById('lbSend2').textContent = k.send2;
+  document.getElementById('lbAll').textContent = k.sendall;
+  document.getElementById('sendTo').innerHTML = k.sendto;
+  var cap = document.getElementById('sendCap'), ok = canSendFiles();
+  cap.textContent = ok ? k.can_share : k.no_share;
+  cap.className = 'cap ' + (ok ? 'good' : 'bad');
+  document.getElementById('lbProjs').textContent = k.projs;
+  document.getElementById('lbNew').textContent = k.nw;
+  document.getElementById('lbClose').textContent = k.close;
+  document.documentElement.lang = L;
+}
+
+function paintHead() {
+  document.getElementById('hName').textContent = P.prj || t().untitled;
+  var bits = [P.tec, P.fec].filter(Boolean);
+  document.getElementById('hSub').textContent = bits.length ? bits.join(' · ') : t().empty;
+}
+
+/* ───────────────────────────────────────────── eventos */
+document.getElementById('secs').addEventListener('click', function (e) {
+  var b = e.target.closest('[data-act]'); if (!b) return;
+  var row = b.closest('.it'), id = row.dataset.id, act = b.dataset.act;
+  if (act === 'cycle') {
+    P.st[id] = (stateOf(id) + 1) % 3;
+    save(); paintItem(id); paintProgress();
+  } else if (act === 'note') {
+    var nt = row.querySelector('[data-note]');
+    nt.classList.toggle('hide');
+    if (!nt.classList.contains('hide')) nt.focus();
+  } else if (act === 'add') {
+    pick(id, false, b.dataset.slot || '');
+  }
+});
+
+/* los botones de dB inyectados */
+document.getElementById('secs').addEventListener('click', function (e) {
+  var b = e.target.closest('[data-inj]'); if (!b) return;
+  var id = b.closest('.it').dataset.id;
+  setVal(id, 'inj', Number(b.dataset.inj));
+  paintItem(id);
+});
+
+/* opciones de los campos nuevos */
+function campoDone(id) {
+  var it = itemById(id), v = valOf(id);
+  if (!it || !it.campos) return;
+  var all = it.campos.every(function (c) { return v[c.id] !== undefined && String(v[c.id]).trim() !== ''; });
+  if (all && stateOf(id) === 0) { P.st[id] = 1; save(); }
+}
+document.getElementById('secs').addEventListener('click', function (e) {
+  var b = e.target.closest('[data-cv]'); if (!b) return;
+  var id = b.closest('.it').dataset.id, it = itemById(id), k = b.getAttribute('data-cmp');
+  var c = it.campos.filter(function (x) { return x.id === k; })[0];
+  var op = c.ops.filter(function (o) { return String(o.v) === b.getAttribute('data-cv'); })[0];
+  setVal(id, k, op ? op.v : b.getAttribute('data-cv'));
+  campoDone(id); paintItem(id); paintProgress();
+});
+
+/* campos numericos: VSWR e isolation */
+document.getElementById('secs').addEventListener('input', function (e) {
+  var el = e.target, row = el.closest('.it'); if (!row) return;
+  var id = row.dataset.id;
+  if (el.hasAttribute('data-num')) { setVal(id, 'v', el.value); paintItem(id); }
+  else if (el.hasAttribute('data-iso')) { setVal(id, el.getAttribute('data-iso'), el.value); paintItem(id); }
+  else if (el.hasAttribute('data-cmp')) { setVal(id, el.getAttribute('data-cmp'), el.value); campoDone(id); paintItem(id); paintProgress(); }
+});
+document.getElementById('secs').addEventListener('input', function (e) {
+  var nt = e.target.closest('[data-note]'); if (!nt) return;
+  var id = nt.closest('.it').dataset.id;
+  P.nt[id] = nt.value; save();
+});
+
+function pick(id, allowVideo, slot) {
+  var inp = document.createElement('input');
+  inp.type = 'file'; inp.multiple = true;
+  inp.accept = allowVideo ? 'image/*,video/*' : 'image/*';
+  inp.onchange = function () {
+    var fs = Array.prototype.slice.call(inp.files || []);
+    if (!fs.length) return;
+    var chain = Promise.resolve();
+    fs.forEach(function (f) {
+      chain = chain.then(function () {
+        if (f.size > 60 * 1024 * 1024) { toast(t().bigfile); return; }
+        return shrink(f).then(function (r) {
+          var rec = {
+            fid: 'f' + Date.now() + Math.floor(Math.random() * 1e6), pid: P.id, iid: id,
+            blob: r.blob, video: !!r.video, name: f.name || '', w: r.w, h: r.h, ts: Date.now(),
+            slot: slot || ''
+          };
+          TOUCHED = true;
+        return put('file', rec).then(function () { FILES.push(rec); });
+        });
+      });
+    });
+    chain.then(function () {
+      if (stateOf(id) === 0) { P.st[id] = 1; save(); }
+      paintItem(id); paintProgress();
+    });
+  };
+  inp.click();
+}
+
+['mPrj', 'mTec', 'mFec', 'mDir', 'mMod', 'mSn', 'mObs'].forEach(function (k) {
+  document.getElementById(k).addEventListener('input', function (e) {
+    P[k.slice(1).toLowerCase()] = e.target.value; save(); paintHead();
+  });
+});
+
+document.getElementById('btnLang').onclick = function () {
+  L = L === 'es' ? 'en' : 'es';
+  try { localStorage.setItem('bwa_lang', L); } catch (e) {}
+  paintLang(); paintHead(); renderSetup(); render();
+};
+
+/* ── hoja de proyectos */
+var sheet = document.getElementById('sheet');
+document.getElementById('btnProj').onclick = function () { paintProjs(); sheet.classList.add('on'); };
+document.getElementById('btnClose').onclick = function () { sheet.classList.remove('on'); };
+sheet.onclick = function (e) { if (e.target === sheet) sheet.classList.remove('on'); };
+document.getElementById('btnNew').onclick = function () {
+  P = newProj(); FILES = [];
+  put('proj', P).then(function () {
+    try { localStorage.setItem('bwa_cur', P.id); } catch (e) {}
+    loadForm(); render(); paintHead(); sheet.classList.remove('on');
+    document.getElementById('mPrj').focus();
+  });
+};
+function paintProjs() {
+  all('proj').then(function (list) {
+    PROJS = list.sort(function (a, b) { return b.upd - a.upd; });
+    var h = '';
+    PROJS.forEach(function (p) {
+      var o = 0; Object.keys(p.st || {}).forEach(function (k) { if (p.st[k] === 1) o++; });
+      h += '<div class="prow' + (p.id === P.id ? ' cur' : '') + '">' +
+        '<div class="pn2"><b>' + esc(p.prj || t().untitled) + '</b>' +
+        '<small>' + esc([p.tec, p.fec].filter(Boolean).join(' · ')) + ' — ' + o + '</small></div>' +
+        (p.id === P.id ? '' : '<button class="tb" type="button" data-open="' + p.id + '">' + esc(t().open) + '</button>') +
+        '<button class="tb" type="button" data-del="' + p.id + '">🗑</button></div>';
+    });
+    var box = document.getElementById('plist');
+    box.innerHTML = h;
+    box.querySelectorAll('[data-open]').forEach(function (b) {
+      b.onclick = function () { openProj(b.dataset.open); };
+    });
+    box.querySelectorAll('[data-del]').forEach(function (b) {
+      b.onclick = function () {
+        if (!confirm(t().delp)) return;
+        var pid = b.dataset.del;
+        all('file', 'by_proj', pid).then(function (fs) {
+          return Promise.all(fs.map(function (f) { return del('file', f.fid); }));
+        }).then(function () { return del('proj', pid); })
+          .then(function () {
+            if (pid === P.id) { return all('proj').then(function (l) { return openProj(l.length ? l[0].id : null); }); }
+            paintProjs();
+          });
+      };
+    });
+  });
+}
+function openProj(pid) {
+  var step = pid ? all('proj').then(function (l) { return l.filter(function (x) { return x.id === pid; })[0]; })
+                 : Promise.resolve(null);
+  return step.catch(function () { return null; }).then(function (p) {
+    P = p || newProj();
+    if (!p) return put('proj', P);
+  }).then(function () {
+    try { localStorage.setItem('bwa_cur', P.id); } catch (e) {}
+    return all('file', 'by_proj', P.id);
+  }).catch(function () { return []; }).then(function (fs) {
+    FILES = (fs || []).sort(function (a, b) { return a.ts - b.ts; });
+    loadForm(); renderSetup(); render(); paintHead(); paintStoreWarn();
+    sheet.classList.remove('on');
+  });
+}
+
+function loadForm() {
+  document.getElementById('mPrj').value = P.prj || '';
+  document.getElementById('mTec').value = P.tec || '';
+  document.getElementById('mFec').value = P.fec || '';
+  document.getElementById('mDir').value = P.dir || '';
+  document.getElementById('mMod').value = P.mod || '';
+  document.getElementById('mSn').value = P.sn || '';
+  document.getElementById('mObs').value = P.obs || '';
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   Salidas — PDF y ZIP, ambas escritas a mano para que funcionen sin red.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Puede este telefono mandar archivos por la hoja de compartir?
+   Se comprueba con un archivo de mentira, sin abrir nada. */
+function canSendFiles() {
+  try {
+    if (!navigator.share || !navigator.canShare) return false;
+    return navigator.canShare({ files: [new File([new Blob(['x'])], 'x.txt', { type: 'text/plain' })] });
+  } catch (e) { return false; }
+}
+
+/* ── Entrega del archivo.
+   Safari en iPhone IGNORA el atributo `download`: un <a download> no guarda
+   nada. Lo que sí funciona, y ademas es lo que el tecnico quiere hacer, es la
+   HOJA DE COMPARTIR del sistema — desde ahi lo manda por WhatsApp o correo
+   directo a Valeria. Ese es el primer camino; los demas son respaldo.        */
+function deliver(bytes, filename, mime) {
+  var blob = new Blob([bytes], { type: mime });
+
+  /* 1 · hoja de compartir del telefono */
+  try {
+    if (navigator.share && navigator.canShare) {
+      var f = new File([blob], filename, { type: mime });
+      if (navigator.canShare({ files: [f] })) {
+        return navigator.share({ files: [f], title: filename })
+          .catch(function (e) {
+            if (e && e.name === 'AbortError') return;   // el tecnico cerro la hoja
+            return fallback(blob, filename);
+          });
+      }
+    }
+  } catch (e) {}
+
+  /* 2 · el guardador del visor de Claude, si la pagina corre ahi */
+  var viaClaude = (typeof window.claude === 'object' && window.claude && window.claude.use)
+    ? window.claude.use('downloads').catch(function () { return null; })
+    : Promise.resolve(null);
+  return viaClaude.then(function (dl) {
+    if (dl && dl.save) return dl.save({ filename: filename, data: blob });
+    return fallback(blob, filename);
+  });
+}
+
+/* Manda el PDF y el ZIP juntos, en una sola hoja de compartir. Es un toque en
+   vez de dos, y el tecnico no puede mandar uno y olvidarse del otro. */
+function deliverMany(list) {
+  try {
+    if (navigator.share && navigator.canShare) {
+      var files = list.map(function (x) { return new File([new Blob([x.bytes], { type: x.mime })], x.name, { type: x.mime }); });
+      if (navigator.canShare({ files: files })) {
+        return navigator.share({ files: files, title: files[0].name })
+          .catch(function (e) { if (e && e.name === 'AbortError') return; throw e; });
+      }
+    }
+  } catch (e) {}
+  /* si no se puede mandar todo junto, se entrega uno por uno */
+  var chain = Promise.resolve();
+  list.forEach(function (x) { chain = chain.then(function () { return deliver(x.bytes, x.name, x.mime); }); });
+  return chain;
+}
+
+function fallback(blob, filename) {
+  /* 3 · descarga clasica — sirve en computadora y en Android */
+  try {
+    var a = document.createElement('a');
+    if ('download' in a) {
+      var u = URL.createObjectURL(blob);
+      a.href = u; a.download = filename;
+      document.body.appendChild(a); a.click();
+      setTimeout(function () { URL.revokeObjectURL(u); a.remove(); }, 4000);
+      return Promise.resolve();
+    }
+  } catch (e) {}
+  /* 4 · ultimo recurso: abrirlo para que lo guarde a mano */
+  try {
+    var u2 = URL.createObjectURL(blob);
+    var w = window.open(u2, '_blank');
+    if (w) { setTimeout(function () { URL.revokeObjectURL(u2); }, 60000); return Promise.resolve(); }
+  } catch (e) {}
+  return Promise.reject(new Error('nosave'));
+}
+
+/* ── nombre estable de archivo por ítem */
+function fileName(f, n) {
+  var slug = (f.iid + '').replace(/[^A-Za-z0-9.]/g, '');
+  if (f.slot) slug += '-' + f.slot.replace(/[^A-Za-z0-9]/g, '');
+  return slug + '_' + String(n).padStart(2, '0') + (f.video ? videoExt(f) : '.jpg');
+}
+function videoExt(f) {
+  var m = (f.blob.type || '').split('/')[1] || 'mp4';
+  return '.' + m.replace(/[^a-z0-9]/g, '').slice(0, 5);
+}
+
+/* ─────────────────────────────── CRC32 (para el ZIP) */
+var CRCT = (function () {
+  var t = new Uint32Array(256);
+  for (var n = 0; n < 256; n++) {
+    var c = n;
+    for (var k = 0; k < 8; k++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+    t[n] = c >>> 0;
+  }
+  return t;
+})();
+function crc32(u8) {
+  var c = 0xFFFFFFFF;
+  for (var i = 0; i < u8.length; i++) c = CRCT[(c ^ u8[i]) & 0xFF] ^ (c >>> 8);
+  return (c ^ 0xFFFFFFFF) >>> 0;
+}
+/* ZIP en modo "stored": los JPEG y los MP4 ya vienen comprimidos, así que
+   comprimirlos otra vez no ahorra nada y sí costaría CPU en el teléfono. */
+function buildZip(entries) {
+  var enc = new TextEncoder(), parts = [], central = [], off = 0;
+  function u16(v) { return [v & 255, (v >>> 8) & 255]; }
+  function u32(v) { return [v & 255, (v >>> 8) & 255, (v >>> 16) & 255, (v >>> 24) & 255]; }
+  entries.forEach(function (e) {
+    var nm = enc.encode(e.name), crc = crc32(e.data), sz = e.data.length;
+    var lh = [].concat([0x50, 0x4B, 0x03, 0x04], u16(20), u16(0), u16(0), u16(0), u16(0),
+      u32(crc), u32(sz), u32(sz), u16(nm.length), u16(0));
+    parts.push(new Uint8Array(lh), nm, e.data);
+    central.push({ nm: nm, crc: crc, sz: sz, off: off });
+    off += lh.length + nm.length + sz;
+  });
+  var cstart = off, cparts = [];
+  central.forEach(function (c) {
+    var ch = [].concat([0x50, 0x4B, 0x01, 0x02], u16(20), u16(20), u16(0), u16(0), u16(0), u16(0),
+      u32(c.crc), u32(c.sz), u32(c.sz), u16(c.nm.length), u16(0), u16(0), u16(0), u16(0), u32(0), u32(c.off));
+    cparts.push(new Uint8Array(ch), c.nm);
+    off += ch.length + c.nm.length;
+  });
+  var eocd = new Uint8Array([].concat([0x50, 0x4B, 0x05, 0x06], u16(0), u16(0),
+    u16(central.length), u16(central.length), u32(off - cstart), u32(cstart), u16(0)));
+  var total = 0, allp = parts.concat(cparts, [eocd]);
+  allp.forEach(function (p) { total += p.length; });
+  var out = new Uint8Array(total), p = 0;
+  allp.forEach(function (x) { out.set(x, p); p += x.length; });
+  return out;
+}
+
+function blobBytes(b) {
+  return b.arrayBuffer ? b.arrayBuffer().then(function (a) { return new Uint8Array(a); })
+    : new Promise(function (res) {
+      var fr = new FileReader();
+      fr.onload = function () { res(new Uint8Array(fr.result)); };
+      fr.readAsArrayBuffer(b);
+    });
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   EXPORTACION BILINGUE.
+
+   El tecnico trabaja en el idioma que quiera, pero el PDF y el resumen salen
+   SIEMPRE en los dos: ingles arriba, espanol debajo. El documento no se queda
+   en el telefono — termina en un binder que leen inspectores en ingles, y a la
+   vez lo revisa gente de la compania en espanol. Andres, 2026-08-31.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Une los dos idiomas en una linea, sin repetir cuando son identicos
+   (los nombres de las alarmas, por ejemplo, van en ingles en ambos). */
+function bi(en, es, sep) {
+  en = (en || '').trim(); es = (es || '').trim();
+  if (!es || es === en) return en;
+  if (!en) return es;
+  return en + (sep || '  /  ') + es;
+}
+function biItem(i, campo) {
+  return bi((i.en || {})[campo], (i.es || {})[campo]);
+}
+
+/* La linea de lo medido va en ingles: son numeros y terminos que en campo se
+   escriben en ingles igual (VSWR, dB, threshold). */
+function valText(i) {
+  var v = valOf(i.id);
+  if (i.campos) {
+    return i.campos.map(function (c) {
+      var x = v[c.id], shown = '-';
+      if (x !== undefined && String(x).trim() !== '') {
+        if (c.tipo === 'opcion') {
+          var op = c.ops.filter(function (o) { return String(o.v) === String(x); })[0];
+          shown = op ? op.en : String(x);
+        } else shown = String(x);
+      }
+      return c.en + ': ' + shown;
+    }).join('   ·   ');
+  }
+  if (i.num) {
+    var n = parseFloat(String(v.v).replace(',', '.'));
+    if (isNaN(n)) return '';
+    return i.num.label_en + ': ' + v.v + '   ' + (n < i.num.max ? '[PASS]' : '[FAIL]');
+  }
+  if (i.iso) {
+    var r = isoCalc(i);
+    if (r.iso === null) return i.iso.band + ' MHz — threshold ' + r.thr + ' dB (not measured / sin medir)';
+    return i.iso.band + ' MHz:  ' + r.inj + ' dB injected − (' + r.rx + ' dBm received) = ' +
+      r.iso + ' dB   ·   threshold ' + r.thr + ' dB   ' +
+      (r.iso > r.thr ? '[PASS]' : r.iso === r.thr ? '[AT THE EDGE]' : '[FAIL]');
+  }
+  return '';
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   LO QUE PIDIO BROWARD, PEDIDO POR PEDIDO.
+   Para la persona de Services que arma la entrega: cada pedido del inspector
+   con su texto EXACTO del correo, y debajo los items, fotos y datos que lo
+   cumplen. Asi se ve de un vistazo que falta antes de mandarlo. Andres,
+   2026-10-19.
+   ═══════════════════════════════════════════════════════════════════════ */
+function refReport() {
+  var vis = visibleItems();
+  var per = {}, names = {};
+  FILES.forEach(function (f) {
+    var k = f.iid + '|' + (f.slot || ''); per[k] = (per[k] || 0) + 1;
+    (names[f.iid] = names[f.iid] || []).push(fileName(f, per[k]));
+  });
+  return (DATA.refs || []).map(function (r) {
+    var its = vis.filter(function (x) { return (x.it.ref || []).indexOf(r.id) >= 0; }).map(function (x) {
+      var i = x.it;
+      /* foto con nombre que falta: el item se marca hecho con la primera foto,
+         pero para la entrega importa cada una (p. ej. C1 sin la de instalacion) */
+      var miss = slotsOf(i).filter(function (sl) { return !sl.opt && !filesOf(i.id, sl.id).length; });
+      return { i: i, st: stateOf(i.id), files: names[i.id] || [], vt: valText(i), miss: miss };
+    });
+    var done = its.length > 0 && its.every(function (x) { return x.st === 1 && !x.miss.length; });
+    return { r: r, items: its, done: done };
+  });
+}
+
+function summaryText() {
+  var L2 = [];
+  L2.push('BDA ANNUAL INSPECTION — BROWARD  /  INSPECCIÓN ANUAL BDA');
+  L2.push('Skylight Technologies - BDA / ERCES  ' + DATA.version);
+  L2.push('');
+  L2.push('TECHNICIAN / TECNICO : ' + (P.tec || '-'));
+  L2.push('PROJECT / PROYECTO   : ' + (P.prj || '-'));
+  L2.push('DATE / FECHA         : ' + (P.fec || '-'));
+  L2.push('ADDRESS / DIRECCION  : ' + (P.dir || '-'));
+  L2.push('BDA MAKE-MODEL / MARCA-MODELO : ' + (P.mod || '-'));
+  L2.push('SERIAL # / S/N       : ' + (P.sn || '-'));
+  L2.push('');
+  DATA.setup.forEach(function (q) {
+    var cur = q.ops.filter(function (o) { return String(o.v) === String(cfg(q.id)); })[0];
+    L2.push(bi(q.en, q.es) + '  ->  ' + (cur ? bi(cur.en, cur.es, ' / ') : '-'));
+  });
+  var c = counts();
+  L2.push('');
+  L2.push(c.ok + '/' + c.tot + ' done/listos  ·  ' + c.na + ' N/A  ·  ' +
+          (c.tot - c.ok - c.na) + ' pending/pendientes');
+  L2.push('');
+  L2.push('######## BROWARD REQUESTS — WHAT IS DELIVERED FOR EACH ONE ########');
+  L2.push('######## PEDIDOS DE BROWARD — QUE SE ENTREGA PARA CADA UNO ########');
+  L2.push('Inspector text quoted exactly as received. Email 1 = ' + DATA.mails['1'] + ' · Email 2 = ' + DATA.mails['2']);
+  refReport().forEach(function (x) {
+    L2.push('');
+    L2.push(x.r.id + '  (Email ' + x.r.mail + ', ' + DATA.mails[String(x.r.mail)] + ')   ' +
+            (x.done ? '[COMPLETE / COMPLETO]' : '[INCOMPLETE / INCOMPLETO]'));
+    L2.push('  Inspector: "' + x.r.q + '"');
+    if (x.r.note_en) L2.push('  Skylight note: ' + bi(x.r.note_en, x.r.note_es));
+    x.items.forEach(function (y) {
+      L2.push('    ' + (y.st === 1 ? '[X]' : y.st === 2 ? '[N/A]' : '[ ]') + ' ' + y.i.id + '  ' + y.i.en.t);
+      if (y.vt) L2.push('        >> ' + y.vt);
+      var fl = y.files.length ? y.files.join(', ') : (y.i.ev === 'dato' || y.i.ev === 'check' ? '' : 'NO PHOTO / SIN FOTO');
+      if (fl) L2.push('        ' + fl);
+      if (y.files.length && y.miss.length) L2.push('        MISSING / FALTA: ' + y.miss.map(function (m) { return bi(m.en, m.es); }).join('; '));
+    });
+  });
+  L2.push('');
+  L2.push('######## DETAIL BY SECTION / DETALLE POR SECCION ########');
+  DATA.secciones.forEach(function (s) {
+    var items = s.items.filter(applies);
+    if (!items.length) return;
+    L2.push('');
+    L2.push('=== ' + s.id + ' — ' + bi(s.en, s.es) + ' ===');
+    items.forEach(function (i) {
+      var st = stateOf(i.id), lab = st === 1 ? '[X]' : st === 2 ? '[N/A]' : '[ ]';
+      L2.push(lab + ' ' + i.id + '  ' + (i.en.t || ''));
+      if (i.es.t && i.es.t !== i.en.t) L2.push('        ' + i.es.t);
+      var vt = valText(i);
+      if (vt) L2.push('     >> ' + vt);
+      var sl = slotsOf(i);
+      if (sl.length) {
+        sl.forEach(function (s2) {
+          var fs = filesOf(i.id, s2.id);
+          if (fs.length) L2.push('        ' + bi(s2.en, s2.es) + ': ' +
+            fs.map(function (f, n) { return fileName(f, n + 1); }).join(', '));
+        });
+      } else {
+        var fs2 = filesOf(i.id, '');
+        if (fs2.length) L2.push('        ' + fs2.map(function (f, n) { return fileName(f, n + 1); }).join(', '));
+      }
+      var nt = (P.nt && P.nt[i.id]) || '';
+      if (nt) L2.push('        NOTE: ' + nt);
+    });
+  });
+  if (P.obs) {
+    L2.push(''); L2.push('=== GENERAL NOTES / OBSERVACIONES GENERALES ===');
+    L2.push(P.obs);
+  }
+  return L2.join('\r\n');
+}
+
+/* arma el ZIP y devuelve los bytes (no lo entrega) */
+function makeZip() {
+  var per = {}, entries = [];
+  var chain = Promise.resolve();
+  FILES.forEach(function (f) {
+    chain = chain.then(function () {
+      var k = f.iid + '|' + (f.slot || '');
+      per[k] = (per[k] || 0) + 1;
+      return blobBytes(f.blob).then(function (b) {
+        entries.push({ name: fileName(f, per[k]), data: b });
+      });
+    });
+  });
+  return chain.then(function () {
+    entries.unshift({ name: '00_SUMMARY_RESUMEN.txt', data: new TextEncoder().encode(summaryText()) });
+    return { bytes: buildZip(entries), name: base() + '_FOTOS.zip', mime: 'application/zip' };
+  });
+}
+
+/* arma el PDF y devuelve los bytes (no lo entrega) */
+function makePdf() {
+  var per = {}, photos = [];
+  var chain = Promise.resolve();
+  FILES.forEach(function (f) {
+    chain = chain.then(function () {
+      var k = f.iid + '|' + (f.slot || '');
+      per[k] = (per[k] || 0) + 1;
+      var nm = fileName(f, per[k]);
+      if (f.video) return;
+      return blobBytes(f.blob).then(function (b) {
+        if (b[0] === 0xFF && b[1] === 0xD8) photos.push({ bytes: b, label: nm });
+      });
+    });
+  });
+  return chain.then(function () {
+    return { bytes: buildPdf(photos), name: base() + '.pdf', mime: 'application/pdf' };
+  });
+}
+
+function sendZip() {
+  if (!FILES.length) { toast(t().nofiles); return; }
+  toast(t().zipping);
+  return makeZip().then(function (z) { return deliver(z.bytes, z.name, z.mime); })
+    .then(function () { toast(t().zipok); })
+    .catch(function () { toast(t().nosave); });
+}
+function sendPdf() {
+  toast(t().pdfing);
+  return makePdf().then(function (d) { return deliver(d.bytes, d.name, d.mime); })
+    .then(function () { toast(t().pdfok); })
+    .catch(function () { toast(t().nosave); });
+}
+function sendAll() {
+  toast(t().sending);
+  return makePdf().then(function (pdf) {
+    if (!FILES.length) return deliverMany([pdf]);
+    return makeZip().then(function (zip) { return deliverMany([pdf, zip]); });
+  }).then(function () { toast(t().sent); })
+    .catch(function () { toast(t().nosave); });
+}
+
+document.getElementById('btnZip').onclick = sendZip;
+document.getElementById('btnZip2').onclick = sendZip;
+document.getElementById('btnAll').onclick = sendAll;
+
+function base() {
+  var s = (P.prj || 'BDA').replace(/[^A-Za-z0-9 _-]/g, '').trim().replace(/\s+/g, '_').slice(0, 40);
+  return (s || 'BDA') + '_' + (P.fec || '');
+}
+
+/* ─────────────────────────────── PDF escrito a mano
+   Los JPEG se incrustan tal cual con /DCTDecode: no se re-codifican, así que
+   no se pierde calidad y no hace falta ninguna librería. El texto usa
+   Helvetica (base-14), con WinAnsi para que los acentos salgan bien.        */
+function winAnsi(s) {
+  var map = { 'á': 225, 'é': 233, 'í': 237, 'ó': 243, 'ú': 250, 'ñ': 241, 'Á': 193, 'É': 201, 'Í': 205, 'Ó': 211, 'Ú': 218, 'Ñ': 209, 'ü': 252, 'Ü': 220, '¿': 191, '¡': 161, '°': 176, '·': 183, '—': 151, '–': 150, '“': 147, '”': 148, '‘': 145, '’': 146, '…': 133, '«': 171, '»': 187, '€': 128, '±': 177, 'µ': 181 };
+  var out = [];
+  for (var i = 0; i < s.length; i++) {
+    var ch = s[i], cc = s.charCodeAt(i);
+    if (map[ch] !== undefined) out.push(map[ch]);
+    else if (cc >= 32 && cc <= 126) out.push(cc);
+    else if (cc === 0x2713) { out.push(88); }              // ✓ -> X
+    else if (cc > 126) { /* emoji y demás: fuera del PDF */ }
+    else out.push(32);
+  }
+  var r = '';
+  out.forEach(function (b) {
+    if (b === 40 || b === 41 || b === 92) r += '\\' + String.fromCharCode(b);
+    else r += String.fromCharCode(b);
+  });
+  return r;
+}
+function jpegSize(u8) {
+  var i = 2;
+  while (i < u8.length) {
+    if (u8[i] !== 0xFF) { i++; continue; }
+    var m = u8[i + 1];
+    if (m >= 0xC0 && m <= 0xCF && m !== 0xC4 && m !== 0xC8 && m !== 0xCC) {
+      return { h: (u8[i + 5] << 8) | u8[i + 6], w: (u8[i + 7] << 8) | u8[i + 8] };
+    }
+    i += 2 + ((u8[i + 2] << 8) | u8[i + 3]);
+  }
+  return { w: 1200, h: 900 };
+}
+
+function buildPdf(photos) {
+  /* El contenido del PDF va en WinAnsi: UN byte por caracter. Si se pasa por
+     TextEncoder (UTF-8) cada acento se parte en dos bytes y sale 'DIRECCIÃ\u2122N'. */
+  function l1(s) {
+    var u = new Uint8Array(s.length);
+    for (var i = 0; i < s.length; i++) u[i] = s.charCodeAt(i) & 255;
+    return u;
+  }
+  var W = 612, H = 792, M = 46;          // Letter, márgenes en puntos
+  var objs = [], pages = [], cur = null, y = 0;
+
+  function newPage() {
+    cur = { ops: [], imgs: [] };
+    pages.push(cur);
+    y = H - M;
+  }
+  function need(h) { if (!cur || y - h < M) newPage(); }
+  function text(s, size, x, opts) {
+    opts = opts || {};
+    var f = opts.bold ? '/F2' : '/F1';
+    var c = opts.color || [0.08, 0.09, 0.11];
+    cur.ops.push('BT ' + f + ' ' + size + ' Tf ' + c[0] + ' ' + c[1] + ' ' + c[2] + ' rg 1 0 0 1 ' +
+      x + ' ' + y + ' Tm (' + winAnsi(s) + ') Tj ET');
+  }
+  function line(s, size, opts) {
+    opts = opts || {};
+    var lead = opts.lead || size * 1.32;
+    var maxw = opts.maxw || (W - 2 * M);
+    var chars = Math.max(12, Math.floor(maxw / (size * 0.487)));
+    var words = String(s).split(/\s+/), row = '', rows = [];
+    words.forEach(function (w) {
+      if ((row + ' ' + w).trim().length > chars) { if (row) rows.push(row); row = w; }
+      else row = (row ? row + ' ' : '') + w;
+    });
+    if (row) rows.push(row);
+    rows.forEach(function (r) {
+      need(lead + 2);
+      text(r, size, opts.x || M, opts);
+      y -= lead;
+    });
+  }
+  function rule(gap) {
+    need(8);
+    y -= (gap || 4);
+    cur.ops.push('0.82 0.85 0.85 RG 0.7 w ' + M + ' ' + y + ' m ' + (W - M) + ' ' + y + ' l S');
+    y -= (gap || 4);
+  }
+  function band(h, col) {
+    need(h + 4);
+    cur.ops.push(col[0] + ' ' + col[1] + ' ' + col[2] + ' rg ' + M + ' ' + (y - h + 4) + ' ' +
+      (W - 2 * M) + ' ' + h + ' re f');
+  }
+
+  newPage();
+  /* portada compacta: la barra roja es la marca del gabinete */
+  cur.ops.push('0.122 0.353 0.651 rg ' + M + ' ' + (y - 22) + ' ' + (W - 2 * M) + ' 26 re f');
+  cur.ops.push('BT /F2 14 Tf 1 1 1 rg 1 0 0 1 ' + (M + 9) + ' ' + (y - 13) + ' Tm (' +
+    winAnsi('BDA ANNUAL INSPECTION — BROWARD  /  INSPECCIÓN ANUAL BDA') + ') Tj ET');
+  y -= 40;
+  text('Skylight Technologies  ·  BDA / ERCES  ·  ' + DATA.version, 9, M, { color: [0.42, 0.45, 0.5] });
+  y -= 20;
+
+  var rows = [['TECHNICIAN / TECNICO', P.tec],
+              ['PROJECT / PROYECTO', P.prj],
+              ['DATE / FECHA', P.fec],
+              ['ADDRESS / DIRECCIÓN', P.dir],
+              ['BDA MAKE-MODEL / MARCA-MODELO', P.mod],
+              ['SERIAL # / S/N', P.sn]];
+  DATA.setup.forEach(function (q) {
+    var cur = q.ops.filter(function (o) { return String(o.v) === String(cfg(q.id)); })[0];
+    rows.push([q.label_en || String(q.en).toUpperCase(),
+               cur ? bi(cur.en, cur.es, ' / ') : '-']);
+  });
+  rows.forEach(function (r) {
+    need(15);
+    text(r[0], 7.5, M, { color: [0.45, 0.48, 0.53], bold: true });
+    text(r[1] || '-', 11.5, M + 168, { bold: true });
+    y -= 15.5;
+  });
+  rule(7);
+  var c = counts();
+  text(c.ok + ' of ' + c.tot + ' done / listos   ·   ' + c.na + ' N/A   ·   ' +
+    (c.tot - c.ok - c.na) + ' pending / pendientes   ·   ' + FILES.length + ' photos / fotos',
+    10.5, M, { bold: true });
+  y -= 22;
+
+  /* pedidos de Broward, uno por uno, con el texto exacto del inspector */
+  need(60); band(19, [0.122, 0.353, 0.651]);
+  y -= 4;   /* texto blanco: tiene que quedar entero dentro de la banda */
+  text('BROWARD REQUESTS — WHAT IS DELIVERED FOR EACH ONE', 11, M + 7, { bold: true, color: [1, 1, 1] }); y -= 20;
+  line('Pedidos de Broward — qué se entrega para cada uno. Inspector text quoted exactly as received.   ' +
+       'Email 1 = ' + DATA.mails['1'] + '   ·   Email 2 = ' + DATA.mails['2'], 8.5, { color: [0.42, 0.45, 0.5] });
+  y -= 4;
+  refReport().forEach(function (x) {
+    need(52);
+    text(x.r.id, 10, M, { bold: true, color: [0.122, 0.353, 0.651] });
+    text('Email ' + x.r.mail, 8, M + 32, { color: [0.45, 0.48, 0.53] });
+    text(x.done ? 'COMPLETE' : 'INCOMPLETE', 8.5, W - M - 62, { bold: true, color: x.done ? [0.12, 0.48, 0.30] : [0.78, 0.16, 0.12] });
+    line('"' + x.r.q + '"', 9.5, { x: M + 76, maxw: W - M - (M + 76) - 66, lead: 12, bold: true });
+    if (x.r.note_en) line('Skylight note: ' + x.r.note_en, 8.5, { x: M + 76, maxw: W - M - (M + 76), lead: 11, color: [0.3, 0.33, 0.38] });
+    x.items.forEach(function (yy) {
+      var col = yy.st === 1 ? [0.12, 0.48, 0.30] : yy.st === 2 ? [0.45, 0.48, 0.53] : [0.78, 0.16, 0.12];
+      need(14);
+      text(yy.st === 1 ? '[X]' : yy.st === 2 ? '[N/A]' : '[  ]', 8.5, M + 76, { bold: true, color: col });
+      line(yy.i.id + '  ' + yy.i.en.t, 9, { x: M + 102, maxw: W - M - (M + 102), lead: 11 });
+      if (yy.vt) line(yy.vt, 8.5, { x: M + 102, maxw: W - M - (M + 102), lead: 10.5, bold: true });
+      var fl = yy.files.length ? yy.files.join('  ') : (yy.i.ev === 'dato' || yy.i.ev === 'check' ? '' : 'NO PHOTO / SIN FOTO');
+      if (fl) line(fl, 8, { x: M + 102, maxw: W - M - (M + 102), lead: 10, color: yy.files.length ? [0.45, 0.48, 0.53] : [0.78, 0.16, 0.12] });
+      if (yy.files.length && yy.miss.length) line('MISSING / FALTA: ' + yy.miss.map(function (m) { return m.en; }).join('; '), 8,
+        { x: M + 102, maxw: W - M - (M + 102), lead: 10, bold: true, color: [0.78, 0.16, 0.12] });
+    });
+    y -= 4;
+    rule(2);
+    y -= 10;
+  });
+  y -= 8;
+
+  /* secciones */
+  DATA.secciones.forEach(function (s) {
+    if (!s.items.filter(applies).length) return;
+    need(40);
+    band(17, [0.93, 0.94, 0.94]);
+    text(s.id + '   ' + bi(s.en, s.es, '   ·   '), 11, M + 7, { bold: true });
+    y -= 22;
+    s.items.filter(applies).forEach(function (i) {
+      var st = stateOf(i.id), fs = filesOf(i.id), nt = (P.nt && P.nt[i.id]) || '';
+      var mark = st === 1 ? '[X]' : st === 2 ? '[N/A]' : '[  ]';
+      var col = st === 1 ? [0.12, 0.48, 0.30] : st === 2 ? [0.45, 0.48, 0.53] : [0.78, 0.16, 0.12];
+      need(16);
+      text(mark, 9, M, { bold: true, color: col });
+      text(i.id, 9, M + 34, { color: [0.35, 0.39, 0.45] });
+      /* ingles arriba, espanol debajo y mas claro. Si son iguales (los nombres
+         de las alarmas), se imprime una sola vez. */
+      line(i.en.t, 10, { x: M + 76, maxw: W - M - (M + 76), lead: 12.5, bold: true });
+      if (i.es.t && i.es.t !== i.en.t) {
+        line(i.es.t, 9, { x: M + 76, maxw: W - M - (M + 76), lead: 11.5,
+                          color: [0.42, 0.45, 0.5] });
+      }
+      if (i.ref && i.ref.length) {
+        line('Broward ref: ' + i.ref.join(', '), 8, { x: M + 76, maxw: W - M - (M + 76), lead: 10, color: [0.122, 0.353, 0.651] });
+      }
+      var vt = valText(i);
+      if (vt) { line(vt, 9.5, { x: M + 76, maxw: W - M - (M + 76), lead: 12, bold: true }); }
+      if (nt) { line('> ' + nt, 9, { x: M + 76, maxw: W - M - (M + 76), lead: 11, color: [0.3, 0.33, 0.38] }); }
+      if (fs.length) {
+        line(fs.map(function (f, n) { return fileName(f, n + 1); }).join('  '), 8,
+          { x: M + 76, maxw: W - M - (M + 76), lead: 10, color: [0.45, 0.48, 0.53] });
+      }
+      y -= 4;
+    });
+    y -= 8;
+  });
+
+  if (P.obs) {
+    need(50); band(17, [0.93, 0.94, 0.94]);
+    text('GENERAL NOTES   ·   OBSERVACIONES GENERALES', 11, M + 7, { bold: true }); y -= 22;
+    line(P.obs, 10, { lead: 13 });
+  }
+
+  /* fotos: una por bloque, con su ID encima */
+  photos.forEach(function (p) {
+    var d = jpegSize(p.bytes);
+    var maxW = W - 2 * M, maxH = 430;
+    var sc = Math.min(maxW / d.w, maxH / d.h, 1.6);
+    var w = d.w * sc, h = d.h * sc;
+    need(h + 30);
+    text(p.label, 9.5, M, { bold: true, color: [0.35, 0.39, 0.45] });
+    y -= 13;
+    var idx = cur.imgs.length;
+    cur.imgs.push(p);
+    cur.ops.push('q ' + w.toFixed(2) + ' 0 0 ' + h.toFixed(2) + ' ' + M + ' ' + (y - h).toFixed(2) +
+      ' cm /Im' + idx + ' Do Q');
+    y -= h + 16;
+  });
+
+  /* ── ensamblar */
+  function obj(s) { objs.push(s); return objs.length; }        // devuelve el número
+  var fontR = null, fontB = null;
+  var imgIds = [];   // por página
+  var contentIds = [], pageIds = [];
+
+  /* 1 catalog, 2 pages — se reservan al final; construimos cuerpos primero */
+  var body = [];
+  var num = 0;
+  function alloc() { num++; return num; }
+
+  var catId = alloc(), pagesId = alloc();
+  var f1 = alloc(), f2 = alloc();
+
+  pages.forEach(function (pg) {
+    var ids = pg.imgs.map(function () { return alloc(); });
+    var cid = alloc(), pid = alloc();
+    pg._ids = ids; pg._cid = cid; pg._pid = pid;
+  });
+
+  function push(id, s) { body[id] = s; }
+
+  push(catId, '<< /Type /Catalog /Pages ' + pagesId + ' 0 R >>');
+  push(pagesId, '<< /Type /Pages /Count ' + pages.length + ' /Kids [' +
+    pages.map(function (p) { return p._pid + ' 0 R'; }).join(' ') + '] >>');
+  push(f1, '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>');
+  push(f2, '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>');
+
+  var streams = {};     // id -> Uint8Array (para imágenes y contenidos)
+  pages.forEach(function (pg) {
+    pg.imgs.forEach(function (im, n) {
+      var id = pg._ids[n], d = jpegSize(im.bytes);
+      push(id, '<< /Type /XObject /Subtype /Image /Width ' + d.w + ' /Height ' + d.h +
+        ' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ' + im.bytes.length + ' >>');
+      streams[id] = im.bytes;
+    });
+    var cs = l1(pg.ops.join('\n'));
+    push(pg._cid, '<< /Length ' + cs.length + ' >>');
+    streams[pg._cid] = cs;
+    var res = '<< /Font << /F1 ' + f1 + ' 0 R /F2 ' + f2 + ' 0 R >>' +
+      (pg._ids.length ? ' /XObject << ' + pg._ids.map(function (id, n) { return '/Im' + n + ' ' + id + ' 0 R'; }).join(' ') + ' >>' : '') + ' >>';
+    push(pg._pid, '<< /Type /Page /Parent ' + pagesId + ' 0 R /MediaBox [0 0 ' + W + ' ' + H + '] /Resources ' +
+      res + ' /Contents ' + pg._cid + ' 0 R >>');
+  });
+
+  var chunks = [], pos = 0, xref = [];
+  function w(u8) { chunks.push(u8); pos += u8.length; }
+  function ws(s) { w(l1(s)); }
+  ws('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n');
+  for (var id = 1; id <= num; id++) {
+    xref[id] = pos;
+    ws(id + ' 0 obj\n' + body[id] + '\n');
+    if (streams[id]) { ws('stream\n'); w(streams[id]); ws('\nendstream\n'); }
+    ws('endobj\n');
+  }
+  var xstart = pos;
+  var x = 'xref\n0 ' + (num + 1) + '\n0000000000 65535 f \n';
+  for (var j = 1; j <= num; j++) x += String(xref[j]).padStart(10, '0') + ' 00000 n \n';
+  x += 'trailer\n<< /Size ' + (num + 1) + ' /Root ' + catId + ' 0 R >>\nstartxref\n' + xstart + '\n%%EOF';
+  ws(x);
+
+  var total = 0; chunks.forEach(function (c) { total += c.length; });
+  var out = new Uint8Array(total), p2 = 0;
+  chunks.forEach(function (c) { out.set(c, p2); p2 += c.length; });
+  return out;
+}
+
+document.getElementById('btnPdf').onclick = sendPdf;
+document.getElementById('btnPdf2').onclick = sendPdf;
+
+/* ═══════════════════════════════════════════════════════════════════════
+   Arranque. Se dibuja PRIMERO y se lee el almacenamiento DESPUES.
+   Asi, si el telefono no deja guardar nada, el tecnico igual tiene un
+   checklist que funciona en vez de una pagina en blanco.
+   ═══════════════════════════════════════════════════════════════════════ */
+(function () {
+  P = newProj(); FILES = [];
+  paintLang(); loadForm(); renderSetup(); render(); paintHead();
+
+  var cur = null;
+  try { cur = localStorage.getItem('bwa_cur'); } catch (e) {}
+
+  initStore().then(function () {
+    paintStoreWarn();
+    /* Si el tecnico ya marco o adjunto algo mientras el almacenamiento
+       arrancaba, se respeta lo que hizo: se guarda en vez de recargar. */
+    if (TOUCHED) { put('proj', P); return; }
+    return openProj(cur);
+  }).catch(function (e) {
+    paintStoreWarn();
+    console.error('almacenamiento', e);
+  });
+})();
+</script>
+
+</html>
